@@ -1,0 +1,29 @@
+import { Button } from "@/components/ui/button";
+
+export const CTA = () => {
+  return (
+    <section className="py-20 px-6">
+      <div className="max-w-4xl mx-auto text-center">
+        <div className="bg-gradient-to-br from-card via-card to-secondary/50 rounded-3xl p-12 shadow-premium border border-primary/20">
+          <h2 className="text-3xl md:text-5xl font-bold mb-6 text-gradient-gold">
+            Pronto para transformar seu escritório?
+          </h2>
+          <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+            Junte-se a centenas de advogados que já automatizaram seus processos e triplicaram sua produtividade
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button size="lg" className="text-lg px-8">
+              Começar Teste Grátis
+            </Button>
+            <Button size="lg" variant="outline" className="text-lg px-8">
+              Agendar Demo
+            </Button>
+          </div>
+          <p className="text-sm text-muted-foreground mt-6">
+            💳 Sem cartão de crédito • ⚡ Configuração em 7 dias • 🎯 Suporte dedicado
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+};
