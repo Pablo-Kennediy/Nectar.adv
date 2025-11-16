@@ -12,11 +12,11 @@ export const CTA = () => {
             Junte-se a centenas de advogados que já automatizaram seus processos e triplicaram sua produtividade
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="text-lg px-8">
-              Começar Teste Grátis
+            <Button size="lg" className="text-lg px-8" asChild>
+              <a href="/templates">Começar Teste Grátis</a>
             </Button>
-            <Button size="lg" variant="outline" className="text-lg px-8">
-              Agendar Demo
+            <Button size="lg" variant="outline" className="text-lg px-8" asChild>
+              <a href="/templates">Agendar Demo</a>
             </Button>
           </div>
           <p className="text-sm text-muted-foreground mt-6">
