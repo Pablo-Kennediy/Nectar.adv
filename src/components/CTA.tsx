@@ -1,6 +1,13 @@
 import { Button } from "@/components/ui/button";
+import { trackWhatsAppClick } from "@/utils/analytics";
 
 export const CTA = () => {
+  const whatsappUrl = `https://wa.me/5534999820661?text=${encodeURIComponent('Olá, visitei o site Néctar e gostaria de saber mais sobre as soluções de automação jurídica para meu escritório.')}`;
+
+  const handleWhatsAppClick = () => {
+    trackWhatsAppClick('CTA_Section');
+  };
+
   return (
     <section className="py-20 px-6">
       <div className="max-w-4xl mx-auto text-center">
@@ -15,8 +22,15 @@ export const CTA = () => {
             <Button size="lg" className="text-lg px-8" asChild>
               <a href="/templates">Começar Teste Grátis</a>
             </Button>
-            <Button size="lg" variant="outline" className="text-lg px-8" asChild>
-              <a href="/templates">Agendar Demo</a>
+            <Button 
+              size="lg" 
+              variant="outline" 
+              className="text-lg px-8 bg-primary hover:bg-primary/90 text-primary-foreground border-primary" 
+              asChild
+            >
+              <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" onClick={handleWhatsAppClick}>
+                💬 Fale Conosco no WhatsApp Agora
+              </a>
             </Button>
           </div>
           <p className="text-sm text-muted-foreground mt-6">
