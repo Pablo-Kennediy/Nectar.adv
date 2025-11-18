@@ -14,6 +14,7 @@ import Empresarial from "./pages/templates/Empresarial";
 import Imobiliario from "./pages/templates/Imobiliario";
 import Penal from "./pages/templates/Penal";
 import Previdenciario from "./pages/templates/Previdenciario";
+import Contato from "./pages/Contato";
 
 const queryClient = new QueryClient();
 
@@ -27,6 +28,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/templates" element={<Templates />} />
           <Route path="/licenca-compra" element={<LicencaCompra />} />
+          <Route path="/contato" element={<Contato />} />
           <Route path="/template/administrativo" element={<Administrativo />} />
           <Route path="/template/ambiental" element={<Ambiental />} />
           <Route path="/template/civil" element={<Civil />} />

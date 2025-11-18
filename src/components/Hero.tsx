@@ -22,9 +22,14 @@ export const Hero = () => {
           <p className="text-lg text-muted-foreground mb-8">
             🚀 Em 7 dias, seu escritório estará rodando com mais eficiência e profissionalismo
           </p>
-          <Button size="lg" className="text-lg px-8" asChild>
-            <a href="/templates">Comece Agora</a>
-          </Button>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <Button size="lg" className="text-lg px-8" asChild>
+              <a href="/templates">Comece Agora</a>
+            </Button>
+            <Button size="lg" variant="outline" className="text-lg px-8" asChild>
+              <a href="/contato">Entrar em Contato</a>
+            </Button>
+          </div>
         </div>
       </div>
     </section>
