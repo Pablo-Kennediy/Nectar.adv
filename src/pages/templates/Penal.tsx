@@ -1,6 +1,15 @@
 import { Link } from "react-router-dom";
+import { useTemplateRedirect } from "@/hooks/useTemplateRedirect";
+import { useEffect } from "react";
+import { trackTemplateView } from "@/utils/analytics";
 
 const Penal = () => {
+  useTemplateRedirect();
+  
+  useEffect(() => {
+    trackTemplateView('Direito Penal');
+  }, []);
+
   return (
     <div style={{ 
       fontFamily: "'Inter', 'Roboto', Arial, sans-serif",

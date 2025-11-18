@@ -1,6 +1,15 @@
 import { Link } from "react-router-dom";
+import { useTemplateRedirect } from "@/hooks/useTemplateRedirect";
+import { useEffect } from "react";
+import { trackTemplateView } from "@/utils/analytics";
 
 const Administrativo = () => {
+  useTemplateRedirect();
+  
+  useEffect(() => {
+    trackTemplateView('Direito Administrativo');
+  }, []);
+
   return (
     <div style={{ 
       fontFamily: "'Open Sans', sans-serif",

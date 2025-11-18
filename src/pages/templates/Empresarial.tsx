@@ -1,6 +1,15 @@
 import { Link } from "react-router-dom";
+import { useTemplateRedirect } from "@/hooks/useTemplateRedirect";
+import { useEffect } from "react";
+import { trackTemplateView } from "@/utils/analytics";
 
 const Empresarial = () => {
+  useTemplateRedirect();
+  
+  useEffect(() => {
+    trackTemplateView('Direito Empresarial');
+  }, []);
+
   return (
     <div style={{ 
       fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",

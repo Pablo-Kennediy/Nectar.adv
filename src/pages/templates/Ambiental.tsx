@@ -1,6 +1,15 @@
 import { Link } from "react-router-dom";
+import { useTemplateRedirect } from "@/hooks/useTemplateRedirect";
+import { useEffect } from "react";
+import { trackTemplateView } from "@/utils/analytics";
 
 const Ambiental = () => {
+  useTemplateRedirect();
+  
+  useEffect(() => {
+    trackTemplateView('Direito Ambiental');
+  }, []);
+
   return (
     <div style={{ 
       fontFamily: "'Roboto', Arial, sans-serif",

@@ -1,6 +1,15 @@
 import { Link } from "react-router-dom";
+import { useTemplateRedirect } from "@/hooks/useTemplateRedirect";
+import { useEffect } from "react";
+import { trackTemplateView } from "@/utils/analytics";
 
 const Previdenciario = () => {
+  useTemplateRedirect();
+  
+  useEffect(() => {
+    trackTemplateView('Direito Previdenciário');
+  }, []);
+
   return (
     <div style={{ 
       fontFamily: "'Roboto', Arial, sans-serif",
