@@ -99,6 +99,12 @@ const LicencaCompra = () => {
           </div>
 
           <div className="text-center">
+            <div className="bg-background/50 p-6 rounded-xl border border-primary/30 mb-6">
+              <p className="text-muted-foreground mb-2">Chave Pix (CNPJ)</p>
+              <p className="text-2xl font-bold text-gradient-gold mb-2">50788948000121</p>
+              <p className="text-sm text-primary">Envie o valor acima</p>
+            </div>
+            
             <Button size="lg" className="text-lg px-8 py-6 w-full md:w-auto" asChild>
               <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" onClick={handleWhatsAppClick}>
                 💬 Garanta Sua Licença Legal Agora (Via WhatsApp)
@@ -119,7 +125,7 @@ const LicencaCompra = () => {
 
       <footer className="border-t border-border py-8 px-6 mt-12">
         <div className="max-w-7xl mx-auto text-center text-muted-foreground">
-          <p>© 2024 Néctar - Todos os direitos reservados</p>
+          <p>© 2024 - Todos os direitos reservados a Pablo Kennedy</p>
         </div>
       </footer>
     </div>

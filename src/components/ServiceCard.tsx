@@ -12,8 +12,8 @@ export const ServiceCard = ({ icon, title, description, features }: ServiceCardP
   return (
     <Card className="group hover:shadow-card transition-all duration-300 hover:scale-105 hover:border-primary/50">
       <CardHeader>
-        <div className="w-16 h-16 mb-4 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-          <img src={icon} alt={title} className="w-12 h-12 object-contain" />
+        <div className="w-16 h-16 mb-4 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors border border-border">
+          <img src={icon} alt={title} className="w-12 h-12 object-contain rounded" />
         </div>
         <CardTitle className="text-2xl text-gradient-gold">{title}</CardTitle>
       </CardHeader>
