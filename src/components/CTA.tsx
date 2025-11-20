@@ -11,8 +11,8 @@ export const CTA = () => {
   return (
     <section className="py-20 px-6">
       <div className="max-w-4xl mx-auto text-center">
-        <div className="bg-gradient-to-br from-card via-card to-secondary/50 rounded-3xl p-12 shadow-premium border border-primary/20">
-          <h2 className="text-3xl md:text-5xl font-bold mb-6 text-gradient-gold">
+        <div className="bg-gradient-to-br from-card via-card to-secondary/50 rounded-3xl p-8 md:p-12 shadow-premium border border-primary/20">
+          <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-6 text-gradient-gold leading-tight">
             Pronto para transformar seu escritório?
           </h2>
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">

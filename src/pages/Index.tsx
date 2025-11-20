@@ -17,7 +17,7 @@ const Index = () => {
       
       <footer className="border-t border-border py-8 px-6">
         <div className="max-w-7xl mx-auto text-center text-muted-foreground">
-          <p>© 2024 Néctar - Todos os direitos reservados</p>
+          <p>© 2024 - Todos os direitos reservados a Pablo Kennedy</p>
         </div>
       </footer>
     </div>
