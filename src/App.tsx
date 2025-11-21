@@ -14,6 +14,7 @@ import Empresarial from "./pages/templates/Empresarial";
 import Imobiliario from "./pages/templates/Imobiliario";
 import Penal from "./pages/templates/Penal";
 import Previdenciario from "./pages/templates/Previdenciario";
+import Tributario from "./pages/templates/Tributario";
 import Contato from "./pages/Contato";
 
 const queryClient = new QueryClient();
@@ -36,6 +37,7 @@ const App = () => (
           <Route path="/template/imobiliario" element={<Imobiliario />} />
           <Route path="/template/penal" element={<Penal />} />
           <Route path="/template/previdenciario" element={<Previdenciario />} />
+          <Route path="/template/tributario" element={<Tributario />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
