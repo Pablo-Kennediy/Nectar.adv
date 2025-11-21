@@ -51,6 +51,13 @@ const Templates = () => {
       description: "Aposentadorias, benefícios e INSS",
       path: "/template/previdenciario",
       icon: "🛡️"
+    },
+    {
+      id: 8,
+      title: "Direito Tributário",
+      description: "CTN, impostos, compliance fiscal e planejamento tributário",
+      path: "/template/tributario",
+      icon: "💰"
     }
   ];
 
