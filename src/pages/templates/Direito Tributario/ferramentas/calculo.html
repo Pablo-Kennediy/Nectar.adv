@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ferramenta de Simulação Fiscal</title>
+    <meta name="description"
+        content="Simulação matemática de cálculos tributários (IRPF, ICMS, etc.) com base nas fórmulas legais do CTN e legislação complementar. Foco em precisão e segurança.">
+    <link rel="stylesheet" href="../styles/main-Direito Tributario.css">
+</head>
+
+<body>
+    <main class="container mx-auto p-4 max-w-6xl">
+        
+        <header class="text-center py-10 header-site rounded-lg mb-8">
+            <h1 class="font-extrabold text-blue-900 mb-2">
+                Simulador Fiscal de Precisão
+            </h1>
+            <p class="text-xl text-gray-700">
+                Lógica Matemática e Legalidade em Seus Cálculos
+            </p>
+        </header>
+
+        <div class="text-center mb-6">
+            <a href="../Direito Tributario.html"
+                class="inline-flex items-center bg-gray-700 text-white font-semibold py-2 px-4 rounded-lg hover:bg-gray-600 transition duration-200">
+                🏠 Voltar para o Início
+            </a>
+        </div>
+        
+        <section class="seguranca-qualidade mb-10 text-center">
+            <div class="p-4 border-l-4 border-green-500 bg-green-50 rounded selo-confiabilidade mx-auto max-w-3xl">
+                <h3 class="font-semibold text-xl text-green-700 mb-1">Cálculo Auditável e Seguro</h3>
+                <p class="text-sm">Os cálculos são realizados sem armazenamento de dados pessoais, seguindo a Arquitetura `/tools` e o **Selo de Confiabilidade** (Testes de Regressão) do projeto.</p>
+            </div>
+        </section>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+            <section class="lg:col-span-1 bg-gray-50 p-6 rounded-lg shadow-xl">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 border-b-2 pb-2">
+                    1. Entrada de Dados
+                </h2>
+                
+                <form id="calculo-form" class="space-y-4">
+                    
+                    <div class="input-group">
+                        <label for="tipoImposto" class="block font-semibold text-gray-700 mb-1">Imposto a Simular:</label>
+                        <select id="tipoImposto" name="tipoImposto" required
+                            class="w-full p-2 border border-gray-600 rounded bg-gray-700 text-white focus:ring-blue-500">
+                            <option value="">Selecione...</option>
+                            <option value="irpf">IRPF (Anual/Mensal)</option>
+                            <option value="icms">ICMS (Inter/Intra Estadual)</option>
+                            <option value="iss">ISS (Cálculo de Alíquota)</option>
+                            </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="baseCalculo" class="block font-semibold text-gray-700 mb-1">Base de Cálculo (R$):</label>
+                        <input type="number" id="baseCalculo" name="baseCalculo" required min="0" step="0.01"
+                            placeholder="Ex: 50000.00"
+                            class="w-full p-2 border border-gray-600 rounded bg-gray-700 text-white focus:ring-blue-500">
+                    </div>
+
+                    <div id="campo-condicional" class="input-group hidden">
+                        <label for="ufDestino" class="block font-semibold text-gray-700 mb-1">UF de Destino (ICMS):</label>
+                        <input type="text" id="ufDestino" name="ufDestino" maxlength="2"
+                            placeholder="Ex: MG"
+                            class="w-full p-2 border border-gray-600 rounded bg-gray-700 text-white uppercase focus:ring-blue-500">
+                    </div>
+                    
+                    <button type="submit"
+                        class="w-full bg-yellow-500 text-blue-900 font-bold py-3 rounded-lg hover:bg-yellow-600 transition duration-200">
+                        CALCULAR TRIBUTO
+                    </button>
+                </form>
+            </section>
+
+            <div class="lg:col-span-2 space-y-8">
+                
+                <section class="bg-gray-50 p-6 rounded-lg shadow-xl border-l-4 border-yellow-500">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4 border-b-2 pb-2">
+                        2. Resultado da Simulação
+                    </h2>
+
+                    <div id="resultado-calculo" class="space-y-3">
+                        
+                        <p class="text-lg text-gray-500">Preencha os campos e clique em "CALCULAR TRIBUTO" para ver o resultado.</p>
+
+                        <div class="hidden" id="resultado-detalhe">
+                            <div class="flex justify-between items-center py-2 border-b border-gray-600">
+                                <span class="font-semibold text-gray-700">Imposto Devido:</span>
+                                <span class="text-2xl font-extrabold text-green-500" id="impostoDevido">R$ 0,00</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2 border-b border-gray-700">
+                                <span class="font-semibold text-gray-700">Alíquota Aplicada:</span>
+                                <span class="text-xl font-bold text-gray-700" id="aliquotaAplicada">0%</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+
+                <section class="p-6 bg-gray-50 rounded-lg shadow-xl border-l-4 border-blue-500">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4 border-b-2 pb-2">
+                        3. Base Legal do Cálculo
+                    </h2>
+                    
+                    <div id="base-legal-texto" class="text-gray-700 space-y-4">
+                        <p>O cálculo é fundamentado legalmente nos seguintes dispositivos (exibidos dinamicamente após o cálculo):</p>
+                        
+                        <ul class="list-disc list-inside ml-4 space-y-1">
+                            <li>**CTN - Art. 113:** Fato Gerador e Obrigação Tributária (Base para o Lançamento).</li>
+                            <li>**CTN - Art. 142:** Definição do Lançamento do Crédito Tributário.</li>
+                            <li><span id="legislacao-especifica" class="font-bold text-blue-700">Legislação Específica:</span> Lei n.º XX/YY (IRPF, ICMS ou ISS).</li>
+                        </ul>
+                        
+                        <p class="text-sm text-gray-500">Clique <a href="../ctn.html" class="underline text-blue-500 hover:text-blue-400">aqui</a> para consultar o CTN na íntegra.</p>
+                    </div>
+                </section>
+                
+            </div>
+        </div>
+        
+        <aside class="aviso-legal text-center text-sm text-red-800 bg-red-200 p-4 rounded mt-8">
+            <p class="font-bold">Aviso Legal Importante: Caráter Não Vinculante</p>
+            <p>O resultado é uma **simulação matemática** para fins de estudo e referência. Não tem validade legal ou fiscal. Sempre valide o cálculo com um profissional habilitado (Advogado ou Contador) e use a legislação oficial.</p>
+        </aside>
+
+    </main>
+
+    <footer class="text-center py-4 text-sm text-gray-500 border-t mt-8">
+        Projeto de desenvolvimento web com foco em precisão fiscal.
+    </footer>
+    
+    <script>
+        document.getElementById('tipoImposto').addEventListener('change', function() {
+            const campoCondicional = document.getElementById('campo-condicional');
+            const tipo = this.value;
+            
+            // Exibe campo condicional se for ICMS, que exige dados adicionais
+            if (tipo === 'icms') {
+                campoCondicional.classList.remove('hidden');
+            } else {
+                campoCondicional.classList.add('hidden');
+            }
+        });
+
+        document.getElementById('calculo-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Simulação de chamada à API ou à lógica de cálculo (Seu backend /api/tools)
+            const baseCalculo = parseFloat(document.getElementById('baseCalculo').value);
+            const tipoImposto = document.getElementById('tipoImposto').value;
+            
+            let aliquota = 0;
+            let resultado = 0;
+            let legislacao = 'Aguardando simulação...';
+
+            if (tipoImposto === 'irpf') {
+                // Simulação: alíquota de 7.5% para uma faixa simplificada
+                aliquota = 7.5;
+                resultado = baseCalculo * (aliquota / 100);
+                legislacao = 'Lei nº 9.250/95 e Tabela Progressiva Mensal.';
+            } else if (tipoImposto === 'icms') {
+                // Simulação: alíquota de 18% (padrão)
+                aliquota = 18;
+                resultado = baseCalculo * (aliquota / 100);
+                legislacao = 'Lei Complementar nº 87/96 (Lei Kandir) e Convênios CONFAZ.';
+            } else if (tipoImposto === 'iss') {
+                // Simulação: alíquota de 5% (teto)
+                aliquota = 5;
+                resultado = baseCalculo * (aliquota / 100);
+                legislacao = 'Lei Complementar nº 116/03 (Lista de Serviços).';
+            }
+
+            // Atualiza os resultados na interface
+            document.getElementById('impostoDevido').textContent = `R$ ${resultado.toFixed(2).replace('.', ',')}`;
+            document.getElementById('aliquotaAplicada').textContent = `${aliquota}%`;
+            document.getElementById('legislacao-especifica').textContent = legislacao;
+            document.getElementById('resultado-detalhe').classList.remove('hidden');
+        });
+    </script>
+</body>
+
+</html>

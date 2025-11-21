@@ -1,0 +1,187 @@
+/* Definição de Variáveis de Cores */
+:root {
+    --azul-principal: #0a4b78; /* Azul Escuro Institucional (Sério e Confiável)*/
+    --azul-claro: #1476b7;   /* Azul para Acentos e Botões*/
+    --fundo-pagina: #f4f7f9; /* Fundo muito claro, quase branco, para legibilidade*/
+    --fundo-card: #ffffff;
+    --texto-principal: #333333;
+    --borda-suave: #e0e0e0;
+    --alerta-amarelo: #fff3cd; /* Fundo do Disclaimer*/
+    --borda-alerta: #ffc107;   /* Borda do Disclaimer*/
+}
+
+/* --- ESTILOS GLOBAIS E TIPOGRAFIA --- */
+body {
+    font-family: 'Arial', sans-serif; /* Fonte de alta legibilidade*/
+    margin: 0;
+    padding: 0;
+    background-color: var(--fundo-pagina);
+    color: var(--texto-principal);
+    line-height: 1.6; /* Melhor espaçamento entre linhas para leitura longa*/
+}
+
+/* Títulos */
+h1, h2, h3 {
+    color: var(--azul-principal);
+    font-weight: 700;
+}
+
+h1 {
+    font-size: 2.2em;
+    margin-bottom: 0.2em;
+}
+
+h2 {
+    font-size: 1.8em;
+    border-bottom: 3px solid var(--borda-suave);
+    padding-bottom: 8px;
+    margin-top: 40px;
+}
+
+/* --- ESTRUTURA E LAYOUT GERAL --- */
+main#conteudo-principal {
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+section {
+    background-color: var(--fundo-card);
+    padding: 30px;
+    margin-bottom: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Sombra suave para destacar o conteúdo*/
+}
+
+/* --- HEADER E NAVEGAÇÃO --- */
+header {
+    background-color: var(--azul-principal);
+    color: white;
+    padding: 25px 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+header nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 15px 0 0 0;
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+}
+
+header nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 5px 10px;
+    border-bottom: 2px solid transparent; /* Linha de base para transição*/
+    transition: border-bottom 0.3s ease;
+}
+
+header nav a:hover {
+    border-bottom: 2px solid white;
+}
+
+/* --- DISCLAIMER E ALERTAS LEGAIS --- */
+#alerta-legal .disclaimer {
+    background-color: var(--alerta-amarelo);
+    border: 1px solid var(--borda-alerta);
+    border-left: 5px solid var(--borda-alerta);
+    padding: 15px;
+    border-radius: 4px;
+    font-size: 0.95em;
+    color: #856404;
+    margin-top: 15px;
+}
+
+/* --- FERRAMENTAS E FORMULÁRIOS (Simulador) --- */
+.ferramenta-calculo {
+    padding: 20px;
+    border: 1px dashed var(--azul-claro);
+    border-radius: 6px;
+    text-align: center;
+    background-color: #f7f9fd; /* Fundo para destacar a área de cálculo*/
+}
+
+.ferramenta-calculo button[disabled] {
+    background-color: var(--borda-suave);
+    color: var(--texto-principal);
+    cursor: not-allowed;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+/* --- LISTAS DE REGRAS E BENEFÍCIOS --- */
+#regras ul, #beneficios ul {
+    list-style: disc;
+    padding-left: 20px;
+}
+
+#regras li, #beneficios li {
+    margin-bottom: 10px;
+}
+
+/* Destaque para palavras-chave dentro de blocos de texto */
+strong {
+    color: var(--azul-principal);
+}
+
+/* --- FOOTER --- */
+footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 30px;
+    border-top: 1px solid var(--borda-suave);
+    color: #666;
+    font-size: 0.9em;
+}
+
+/* --- BOTÃO VOLTAR AO TOPO (BACK TO TOP) --- */
+#back-to-top {
+    /* Posição Fixa no canto inferior direito*/
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    /* Estilo e Cores*/
+    background-color: var(--azul-claro);
+    color: white;
+    border: none;
+    border-radius: 50%; /* Torna o botão redondo*/
+    width: 50px;
+    height: 50px;
+    font-size: 1.2em;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* Transição suave para o hover*/
+    transition: background-color 0.3s, opacity 0.3s;
+    /* Inicialmente invisível e fora do fluxo (será mostrado por JS)*/
+    opacity: 0;
+    pointer-events: none;
+    z-index: 1000; /* Garante que fique acima de outros elementos*/
+}
+
+#back-to-top:hover {
+    background-color: var(--azul-principal);
+}
+
+/* --- RESPONSIVIDADE (MOBILE FIRST) --- */
+@media (max-width: 768px) {
+    main#conteudo-principal {
+        margin: 15px auto;
+        padding: 0 10px;
+    }
+
+    header nav ul {
+        flex-direction: column; /* Links empilhados em telas menores*/
+        gap: 10px;
+        margin-top: 10px;
+    }
+    
+    section {
+        padding: 20px 15px;
+    }
+}

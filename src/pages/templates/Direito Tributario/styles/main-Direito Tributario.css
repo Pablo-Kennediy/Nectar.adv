@@ -1,0 +1,265 @@
+/*
+ * Configurações Base e Reset - DARK MODE
+ */
+:root {
+    /* Cores ajustadas para tema Escuro */
+    --color-primary: #93c5fd; /* Azul Claro para Destaque (Light Blue) */
+    --color-secondary: #fcd34d; /* Amarelo (Mantido) */
+    --color-success: #10b981; /* Verde (Emerald) */
+    --color-danger: #ef4444; /* Vermelho (Red) */
+    
+    /* Fundo e Texto Principais */
+    --color-background-dark: #121212; /* Fundo Principal - Quase Preto */
+    --color-background-secondary: #1f2937; /* Fundo de Seção - Cinza Escuro (Gray-800) */
+    --color-background-light: #2c3e50; /* Fundo do Header (Mais escuro que o background) */
+    --color-text-light: #f3f4f6; /* Texto Principal - Cinza muito claro */
+    --color-text-secondary: #d1d5db; /* Texto Secundário - Cinza claro */
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.6;
+    color: var(--color-text-light); /* Letra Branca/Clara */
+    background-color: var(--color-background-dark); /* Fundo Preto */
+    padding: 0 1rem; /* Adicionado um padding base para melhor visualização */
+}
+
+/*
+ * Layout e Container (mx-auto, p-4, max-w-4xl)
+ */
+.container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1rem; /* p-4 */
+    max-width: 900px; /* max-w-4xl aproximado */
+    background-color: var(--color-background-dark); /* Fundo do Container */
+}
+
+/*
+ * Tipografia e Estilos de Texto
+ */
+h1 {
+    font-size: 3rem; 
+    font-weight: 800; 
+    color: var(--color-primary); /* Destaque Primário */
+    text-shadow: 0 0 10px rgba(147, 197, 253, 0.3); /* Um leve brilho */
+}
+
+h2 {
+    font-size: 2rem; /* Aumentado ligeiramente */
+    font-weight: 700; 
+    color: var(--color-text-light); 
+}
+
+h3 {
+    font-size: 1.5rem; /* Aumentado */
+    font-weight: 600; 
+    color: var(--color-primary); /* Destaque Primário */
+}
+
+p {
+    font-size: 1rem; /* Ajustado para melhor leitura em Dark Mode */
+    color: var(--color-text-secondary);
+}
+
+.text-xl {
+    font-size: 1.25rem; 
+}
+
+.text-sm {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary); /* Textos menores mais suaves */
+}
+
+.font-semibold {
+    font-weight: 600;
+}
+
+.text-blue-900 {
+    color: var(--color-primary);
+}
+
+.text-blue-700 {
+    color: #60a5fa; /* Azul mais claro para texto dentro de seções */
+}
+
+.text-gray-700 {
+    color: var(--color-text-secondary);
+}
+
+.text-red-700 {
+    color: var(--color-danger);
+}
+
+.text-center {
+    text-align: center;
+}
+
+/*
+ * Componentes Estruturais (Header, Sections)
+ */
+.py-10 { padding-top: 2.5rem; padding-bottom: 2.5rem; }
+.mb-8 { margin-bottom: 2rem; }
+.mb-10 { margin-bottom: 2.5rem; }
+.mb-4 { margin-bottom: 1rem; }
+.pb-2 { padding-bottom: 0.5rem; }
+.mt-8 { margin-top: 2rem; }
+
+.rounded-lg { border-radius: 0.5rem; }
+
+/* Header com fundo ligeiramente diferente do body */
+.bg-gray-50 { 
+    background-color: var(--color-background-secondary); 
+    border: 1px solid #374151; /* Borda sutil */
+}
+
+.border-b-2 { border-bottom: 2px solid #374151; /* Borda escura */ }
+
+/*
+ * Listas (UL, LI) - PADRÃO: SEM MARCADOR
+ */
+ul {
+    list-style: none; /* PADRÃO: REMOVE O MARCADOR */
+}
+
+/* Classe específica para listas que PRECISAM do marcador (ex: Fundamentação Legal) */
+.list-disc {
+    list-style-type: disc;
+    list-style-position: inside;
+}
+.list-disc li {
+    padding-left: 0.5rem; 
+}
+.space-y-2 > * + * {
+    margin-top: 0.5rem;
+}
+
+/*
+ * Chamada para Ferramentas (bg-blue-50, shadow-inner)
+ */
+.ferramentas-chamada {
+    background-color: var(--color-background-secondary); 
+    padding: 1.5rem; 
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); /* Sombra mais destacada */
+    border: 1px solid #374151; 
+}
+.ferramentas-chamada h2 {
+    color: var(--color-primary);
+}
+
+
+/*
+ * Botões e Links de Ação (A tag)
+ */
+a {
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.ferramentas-chamada a {
+    display: block; 
+    font-weight: 600; 
+    padding: 0.75rem 1.5rem; 
+    border-radius: 0.5rem; 
+    letter-spacing: 0.05em; /* Melhorado */
+}
+
+.bg-blue-600 {
+    background-color: #3b82f6; /* Azul mais claro para Dark Mode */
+    color: var(--color-background-dark); /* Texto escuro no botão claro */
+}
+
+.bg-blue-600:hover {
+    background-color: #2563eb; 
+    color: white; 
+}
+
+.bg-yellow-500 {
+    background-color: var(--color-secondary);
+    color: var(--color-background-dark);
+}
+
+.bg-yellow-500:hover {
+    background-color: #f59e0b; /* Amarelo mais escuro no hover */
+}
+
+
+/*
+ * Segurança e Qualidade (Alerta/Caixas de Informação)
+ */
+.grid {
+    display: grid;
+    gap: 1.5rem; 
+}
+
+/* Estilos de borda e fundo das caixas de segurança */
+.border-l-4 { border-left-width: 4px; border-left-style: solid; }
+
+.border-red-500 { border-color: var(--color-danger); }
+.bg-red-50 { 
+    background-color: #451a1a; /* Fundo vermelho escuro */
+    border: 1px solid var(--color-danger);
+}
+
+.border-green-500 { border-color: var(--color-success); }
+.bg-green-50 { 
+    background-color: #064e3b; /* Fundo verde escuro */
+    border: 1px solid var(--color-success);
+}
+/* O texto dentro dessas caixas já é ajustado pelas cores de texto padrão */
+.p-4 { padding: 1rem; }
+
+/*
+ * Aviso Legal (aside)
+ */
+.aviso-legal {
+    background-color: #451a1a; /* Fundo escuro do alerta */
+    color: var(--color-danger); 
+    border: 1px solid var(--color-danger);
+    padding: 1rem; 
+}
+.aviso-legal p {
+    color: var(--color-text-light);
+}
+
+/*
+ * Footer
+ */
+footer {
+    border-top: 1px solid #374151; /* Borda escura */
+    padding-top: 1rem; 
+    padding-bottom: 1rem;
+    color: var(--color-text-secondary); 
+    font-size: 0.875rem; 
+    text-align: center;
+    background-color: var(--color-background-dark);
+}
+
+
+/*
+ * Responsividade (Mobile e Desktop)
+ */
+@media (min-width: 768px) {
+    .grid-cols-1.md\:grid-cols-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    
+    .flex.flex-col.sm\:flex-row {
+        flex-direction: row;
+    }
+
+    .ferramentas-chamada div {
+        gap: 1rem; 
+    }
+    .ferramentas-chamada a {
+        display: inline-block;
+        width: auto;
+    }
+}

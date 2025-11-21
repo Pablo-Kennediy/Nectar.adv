@@ -1,0 +1,271 @@
+/*
+    main.css - Estilos para o Site de Compliance e Legislação Ambiental
+    Foco: Legibilidade, Acessibilidade (Alto Contraste) e Usabilidade Profissional.
+    NOVO FOCO: Tema Natureza/Selva (Verde, Madeira e Terra).
+*/
+
+/* --- 1. Variáveis e Reset Básico --- */
+:root {
+    /* Cores - Tema Selva/Terra */
+    --color-primary: #004d00; /* Verde Floresta Escuro (Selva) - Mais profundo que o anterior */
+    --color-secondary: #007bff; /* Azul (Legal / Institucional) - Mantido para contraste em CTAs */
+    --color-text: #2c2c2c; /* Texto principal (quase preto) */
+    --color-background: #fcfbf6; /* Fundo muito claro, quase creme/terra clara */
+    --color-surface: #ffffff; /* Fundo de cartões e áreas de conteúdo */
+    --color-border: #d0c7b6; /* Borda cor de areia/terra clara */
+
+    /* NOVAS CORES ORGÂNICAS */
+    --color-wood: #654321; /* Marrom escuro (Madeira / Elementos de destaque) */
+    --color-earth: #b8860b; /* Castanho Dourado (Terra / Acentos) */
+
+    /* Tipografia */
+    --font-serif: "Merriweather", Georgia, serif;
+    --font-sans: "Roboto", Arial, sans-serif;
+
+    /* Espaçamento */
+    --spacing-unit: 1rem;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* --- 2. Estilos Globais e Tipografia --- */
+body {
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    color: var(--color-text);
+    background-color: var(--color-background);
+    padding-top: 4rem;
+}
+
+main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: var(--spacing-unit) calc(var(--spacing-unit) * 1.5);
+}
+
+h1, h2, h3 {
+    font-family: var(--font-sans);
+    color: var(--color-primary); /* Verde Floresta */
+    line-height: 1.2;
+    margin-bottom: var(--spacing-unit);
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; border-bottom: 2px solid var(--color-border); padding-bottom: 0.5rem; }
+h3 { font-size: 1.5rem; color: var(--color-wood); /* Cor Madeira para sub-títulos */ }
+
+p, ul, ol {
+    margin-bottom: var(--spacing-unit);
+    font-family: var(--font-serif);
+}
+
+/* --- 3. Cabeçalho (Header) e Navegação --- */
+header {
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    padding: calc(var(--spacing-unit) * 1.5);
+    border-bottom: 3px solid var(--color-wood); /* Destaque superior em Marrom Madeira */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    color: var(--color-primary);
+    margin-bottom: 0.25rem;
+}
+
+header p {
+    font-size: 1rem;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-unit);
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: var(--spacing-unit);
+    flex-wrap: wrap;
+    margin-bottom: var(--spacing-unit);
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--color-wood); /* Links na cor Madeira */
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+    font-weight: 600;
+}
+
+nav a:hover {
+    background-color: var(--color-primary); /* Fundo Verde */
+    color: white;
+}
+
+/* --- 4. Barra de Busca --- */
+.search-bar input[type="search"] {
+    width: 300px; /* Largura padrão */
+    padding: 0.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: 4px 0 0 4px;
+    font-size: 1rem;
+}
+
+.search-bar button {
+    padding: 0.75rem 1.5rem;
+    background-color: var(--color-secondary);
+    color: white;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.search-bar button:hover {
+    background-color: #0056b3;
+}
+
+/* Alinhamento da busca */
+.search-bar form {
+    display: flex;
+    max-width: fit-content;
+    margin-top: 0.5rem;
+}
+
+/* --- 5. Seções de Conteúdo e Artigos --- */
+section {
+    padding: calc(var(--spacing-unit) * 2) 0;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background-color: var(--color-earth); /* Linha divisória cor de Terra/Castanho */
+    margin: calc(var(--spacing-unit) * 2) 0;
+}
+
+.cta-button {
+    display: inline-block;
+    background-color: var(--color-primary); /* Verde Floresta */
+    color: white;
+    padding: 1rem 2rem;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+    margin-top: var(--spacing-unit);
+    transition: background-color 0.3s;
+}
+
+.cta-button:hover {
+    background-color: #003300; /* Verde mais escuro no hover */
+}
+
+.regulation-summary, .legal-analysis, .tool-placeholder {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-left: 5px solid var(--color-earth); /* Destaque lateral cor de Terra/Castanho */
+    padding: calc(var(--spacing-unit) * 1.5);
+    margin-top: var(--spacing-unit);
+    border-radius: 4px;
+}
+
+/* --- 6. Rodapé (Footer) --- */
+footer {
+    background-color: var(--color-wood); /* Fundo do rodapé em Marrom Madeira */
+    color: white;
+    padding: calc(var(--spacing-unit) * 2);
+    font-size: 0.9rem;
+}
+
+.legal-notice {
+    background-color: #79553d; /* Um tom de madeira ligeiramente mais claro */
+    padding: var(--spacing-unit);
+    margin-bottom: var(--spacing-unit);
+    border-radius: 4px;
+}
+
+.legal-notice h3 {
+    color: #fce8a6; /* Amarelo dourado suave (Terra clara) */
+    margin-top: 0;
+}
+
+.meta-info {
+    text-align: center;
+    color: #eee;
+}
+
+/* --- 7. Botão Voltar ao Topo (NOVO) --- */
+#backToTopBtn {
+    display: none; /* Esconde por padrão, JS controla a visibilidade */
+    position: fixed; /* Fixa o botão na tela */
+    bottom: 20px;
+    right: 30px;
+    z-index: 99; /* Garante que fique acima de outros elementos */
+    border: none;
+    outline: none;
+    background-color: var(--color-primary); /* Fundo Verde Floresta */
+    color: white;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 50%; /* Transforma em círculo */
+    font-size: 24px;
+    line-height: 1; /* Alinha o ícone */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+#backToTopBtn:hover {
+    background-color: var(--color-wood); /* Cor de Madeira no hover */
+    transform: scale(1.05);
+}
+
+/* --- 8. Responsividade Básica --- */
+@media (max-width: 768px) {
+    header {
+        text-align: center;
+        padding: var(--spacing-unit);
+    }
+
+    nav ul {
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+    .search-bar form {
+        width: 100%;
+        margin-top: var(--spacing-unit);
+    }
+
+    .search-bar input[type="search"] {
+        width: 100%;
+        border-radius: 4px 0 0 4px;
+    }
+
+    .search-bar button {
+        /* Garante que o botão fique ao lado do input */
+        flex-shrink: 0;
+    }
+    
+    #backToTopBtn {
+        bottom: 15px;
+        right: 15px;
+        padding: 12px;
+        font-size: 20px;
+    }
+}
+
+/* Acessibilidade - Esconde elementos visualmente */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}

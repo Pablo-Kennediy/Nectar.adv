@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FGTS e Multa</title>
+    <link rel="stylesheet" href="../../styles/main-Direito do Trabalho.css">
+    </head>
+
+<body>
+    <div class="container-grid">
+        <main role="main">
+            <h1 id="titulo-calculadora">Simulador de FGTS e Multa</h1>
+            <p>Use esta ferramenta para estimar o seu saldo de Fundo de Garantia e o valor da multa rescisória (40% ou 20%), dependendo do tipo de saída. **O cálculo é uma estimativa.**</p>
+
+            <form id="simuladorFGTSForm" class="search-form" onsubmit="event.preventDefault(); simularFGTS();">
+                
+                <h2>Dados do Contrato e Saldo</h2>
+
+                <div class="input-group">
+                    <label for="dataAdmissao">Data de Admissão:</label>
+                    <input type="date" id="dataAdmissao" name="dataAdmissao" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="dataDemissao">Data da Saída/Demissão:</label>
+                    <input type="date" id="dataDemissao" name="dataDemissao" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="salarioBruto">Salário Bruto Mensal (R$):</label>
+                    <input type="number" id="salarioBruto" name="salarioBruto" required min="1" step="0.01"
+                        placeholder="Ex: 3000.00">
+                </div>
+                
+                <hr>
+                
+                <div class="input-group">
+                    <label for="saldoFGTSAtual">Saldo ATUAL do FGTS (R$):</label>
+                    <input type="number" id="saldoFGTSAtual" name="saldoFGTSAtual" min="0" value="0" step="0.01"
+                        placeholder="Informe o valor do extrato (opcional)">
+                    <small>Se não informado, o saldo será estimado pelo tempo de contrato.</small>
+                </div>
+
+                <div class="input-group">
+                    <label for="tipoRescisao">Tipo de Rescisão (Define a Multa):</label>
+                    <select id="tipoRescisao" name="tipoRescisao" required>
+                        <option value="semJustaCausa">Sem Justa Causa (Iniciativa do Empregador - 40%)</option>
+                        <option value="acordo">Rescisão por Acordo (Lei 13.467/17 - 20%)</option>
+                        <option value="pedidoDemissao">Pedido de Demissão (Não saca FGTS/Multa)</option>
+                        <option value="justaCausa">Com Justa Causa (Não saca FGTS/Multa)</option>
+                    </select>
+                </div>
+
+                <button type="submit">Simular Valores de FGTS</button>
+            </form>
+
+            <div id="resultadoSimulacao" class="clt-artigo" style="display: none; margin-top: 2rem;">
+                <h3>Resumo da Simulação do FGTS</h3>
+                <p>Saldo Estimado para Fins Rescisórios:</p>
+                <ul>
+                    <li>**Depósitos Estimados (Admissão até Saída):** <span id="resumoEstimativa"></span></li>
+                    <li>**Saldo Base para Multa (Total):** <span id="saldoTotalFGTS"></span></li>
+                    <li>**Multa Rescisória (40% ou 20%):** <span id="valorMulta"></span></li>
+                </ul>
+                <footer class="box-destaque">
+                    <p>VALOR TOTAL ESTIMADO A SACAR (FGTS + MULTA): <span id="totalASacar" style="font-size: 1.5em; font-weight: 700;"></span></p>
+                    <small>*Este valor é uma estimativa. Não inclui juros, correção monetária, nem o saque integral da conta vinculada (que pode ser maior que o saldo base da multa).</small>
+                </footer>
+            </div>
+
+            <section id="aviso-legal" aria-labelledby="aviso-titulo">
+                <h2 id="aviso-titulo">Integridade Legal e Aviso</h2>
+                <p class="disclaimer">
+                    **Aviso Legal (*Caveat Lector*):** Os cálculos são **aproximados**. O saldo real do FGTS deve ser verificado junto à Caixa Econômica Federal.
+                </p>
+            </section>
+        </main>
+        
+        </div>
+
+    <script>
+        function calcularMesesTrabalhados(dataAdmissao, dataDemissao) {
+            const diffAnos = dataDemissao.getFullYear() - dataAdmissao.getFullYear();
+            const diffMeses = dataDemissao.getMonth() - dataAdmissao.getMonth();
+            let meses = diffAnos * 12 + diffMeses;
+
+            // Arredonda para cima se trabalhar 15 dias ou mais no mês da rescisão
+            if (dataDemissao.getDate() >= 15) {
+                meses += 1;
+            }
+            return meses;
+        }
+        
+        function simularFGTS() {
+            const tipoRescisao = document.getElementById('tipoRescisao').value;
+            const salarioBruto = parseFloat(document.getElementById('salarioBruto').value) || 0;
+            const saldoFGTSAtual = parseFloat(document.getElementById('saldoFGTSAtual').value) || 0;
+            const dataAdmissao = new Date(document.getElementById('dataAdmissao').value);
+            const dataDemissao = new Date(document.getElementById('dataDemissao').value);
+            
+            // 1. Duração do Contrato (em meses)
+            const mesesTrabalhadosTotal = calcularMesesTrabalhados(dataAdmissao, dataDemissao);
+
+            // 2. Estimativa de Depósitos Faltantes (se o saldo atual não for o total)
+            // Depósito mensal é 8% do salário bruto
+            const depositoMensal = salarioBruto * 0.08; 
+            const estimativaDepositos = depositoMensal * mesesTrabalhadosTotal;
+
+            // Para esta simulação, vamos considerar o Saldo Total como a Base da Multa.
+            const saldoTotalFGTS = saldoFGTSAtual > 0 ? saldoFGTSAtual : estimativaDepositos;
+            
+            // 3. Cálculo da Multa Rescisória
+            let percentualMulta = 0;
+            if (tipoRescisao === 'semJustaCausa') {
+                percentualMulta = 0.40; // 40% sobre o saldo
+            } else if (tipoRescisao === 'acordo') {
+                percentualMulta = 0.20; // 20% sobre o saldo
+            }
+
+            const valorMulta = saldoTotalFGTS * percentualMulta;
+
+            // 4. Total a Sacar (FGTS + Multa)
+            let totalASacar = 0;
+            if (percentualMulta > 0) {
+                 // Saca o saldo total + a multa (40% ou 20%)
+                totalASacar = saldoTotalFGTS + valorMulta;
+            } else {
+                 // Nestes casos (Pedido ou Justa Causa), o saque não é devido
+                totalASacar = 0; 
+                alert('Em Pedido de Demissão ou Justa Causa, você não tem direito ao saque do FGTS, nem à multa rescisória, exceto em casos de saque por outras regras (ex: moradia, doenças).');
+            }
+
+
+            // Exibir Resultados
+            document.getElementById('resumoEstimativa').textContent = `R$ ${estimativaDepositos.toFixed(2)}`;
+            document.getElementById('saldoTotalFGTS').textContent = `R$ ${saldoTotalFGTS.toFixed(2)}`;
+            document.getElementById('valorMulta').textContent = `R$ ${valorMulta.toFixed(2)} (${(percentualMulta * 100).toFixed(0)}%)`;
+            document.getElementById('totalASacar').textContent = `R$ ${totalASacar.toFixed(2)}`;
+            document.getElementById('resultadoSimulacao').style.display = 'block';
+        }
+    </script>
+</body>
+
+</html>

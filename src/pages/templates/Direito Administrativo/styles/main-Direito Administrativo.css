@@ -1,0 +1,250 @@
+/*
+|--------------------------------------------------------------------------
+| CSS Principal - Essencial de Direito Administrativo
+| Tema: Autoridade, Clareza e Legibilidade.
+|--------------------------------------------------------------------------
+| Foco em tipografia limpa, cores institucionais e layout responsivo.
+*/
+
+/* 1. Reset Básico e Variáveis de Cores */
+:root {
+    /* Cores Institucionais */
+    --color-primary: #004d99;      /* Azul Escuro (Autoridade, Header) */
+    --color-secondary: #007bff;    /* Azul Médio (Links, Destaques) */
+    --color-background: #f8f9fa;   /* Fundo Claro */
+    --color-text-dark: #212529;    /* Texto Principal */
+    --color-text-light: #6c757d;   /* Texto Secundário/Rodapé */
+    --color-warning: #dc3545;      /* Alerta/Crítico (Aviso Legal) */
+    --color-focus-bg: #e9ecef;     /* Fundo para Seções Críticas */
+
+    /* Tipografia */
+    --font-serif: 'Merriweather', serif;      /* Para títulos (Seriedade) */
+    --font-sans: 'Open Sans', sans-serif;     /* Para corpo de texto (Legibilidade) */
+
+    /* Espaçamento */
+    --space-sm: 8px;
+    --space-md: 20px;
+    --space-lg: 40px;
+}
+
+/* Aplica fontes padrão (Use import de Google Fonts no HTML ou em outro arquivo CSS se for usar as sugeridas) */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    color: var(--color-text-dark);
+    background-color: var(--color-background);
+}
+
+/* 2. Layout Geral e Componentes Base */
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-md);
+}
+
+a {
+    color: var(--color-secondary);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: var(--color-primary);
+    text-decoration: underline;
+}
+
+h1, h2, h3 {
+    font-family: var(--font-serif);
+    margin-bottom: var(--space-md);
+    line-height: 1.2;
+    color: var(--color-primary);
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.5rem; }
+
+p {
+    margin-bottom: var(--space-md);
+}
+
+/* 3. Header e Navegação */
+
+.header {
+    background-color: var(--color-primary);
+    color: white;
+    padding: var(--space-md) 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header h1 {
+    color: white;
+    margin-bottom: var(--space-sm);
+    font-weight: 700;
+}
+
+.main-nav ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+}
+
+.main-nav a {
+    color: white;
+    font-weight: 600;
+    padding: 5px 0;
+}
+
+.main-nav a:hover {
+    color: #ffd700; /* Destaque leve em hover */
+    text-decoration: none;
+}
+
+/* 4. Seções de Conteúdo */
+
+.section-hero {
+    background-color: white;
+    padding: var(--space-lg) 0;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.section-content {
+    padding: var(--space-lg) 0;
+}
+
+/* Destaque para a Seção Crítica (Lei 14.133/2021) */
+.section-critical-focus {
+    background-color: var(--color-focus-bg);
+    padding: var(--space-lg) 0;
+    border-top: 3px solid var(--color-secondary);
+}
+
+.critical-title {
+    color: var(--color-primary);
+    font-size: 2.2rem;
+    border-bottom: 2px solid var(--color-secondary);
+    padding-bottom: var(--space-sm);
+}
+
+/* 5. Listas e Grids */
+
+.legal-fundation ul, .pillar-list, .licitation-topics {
+    list-style: none;
+    padding-left: 0;
+}
+
+/* Pilares LIMPE e Leis de Fundamentação */
+.legal-fundation li {
+    padding: 5px 0;
+}
+
+.pillar-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.pillar-list li {
+    background-color: var(--color-secondary);
+    color: white;
+    padding: var(--space-sm) var(--space-md);
+    border-radius: 4px;
+}
+
+/* Layout de duas colunas (Atos/Poderes, Servidores) */
+.grid-2-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
+}
+
+/* 6. Ferramenta (CTA Box) */
+
+.cta-box {
+    background-color: white;
+    border: 1px solid var(--color-secondary);
+    border-left: 5px solid var(--color-secondary);
+    padding: var(--space-md);
+    margin-top: var(--space-lg);
+    border-radius: 4px;
+    text-align: center;
+}
+
+.cta-box h4 {
+    color: var(--color-primary);
+    margin-bottom: var(--space-sm);
+}
+
+#access-tool-btn {
+    background-color: var(--color-secondary);
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s, transform 0.1s;
+    font-weight: 700;
+}
+
+#access-tool-btn:hover {
+    background-color: var(--color-primary);
+    transform: translateY(-1px);
+}
+
+/* 7. Footer e Avisos Legais */
+
+.footer {
+    background-color: var(--color-text-dark);
+    color: white;
+    padding: var(--space-md) 0;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.footer a {
+    color: #adb5bd;
+}
+
+.footer a:hover {
+    color: white;
+}
+
+.legal-disclaimer {
+    color: var(--color-warning); /* Vermelho para destaque de aviso legal */
+    font-weight: 600;
+    margin-top: var(--space-sm);
+    margin-bottom: var(--space-sm);
+}
+
+/* 8. Responsividade */
+
+@media (max-width: 768px) {
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.5rem; }
+
+    .main-nav ul {
+        justify-content: center;
+        gap: var(--space-sm);
+    }
+    
+    /* Quebra o grid de duas colunas em telas menores */
+    .grid-2-cols {
+        grid-template-columns: 1fr;
+        gap: var(--space-md);
+    }
+
+    .pillar-list {
+        justify-content: center;
+    }
+}

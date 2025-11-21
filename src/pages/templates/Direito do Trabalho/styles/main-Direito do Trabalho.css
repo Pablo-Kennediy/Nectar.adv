@@ -1,0 +1,425 @@
+/*==========================================================*/
+/* 1. VARIÁVEIS DE COR E TIPOGRAFIA */
+/*==========================================================*/
+
+:root {
+    /* Cores de Alto Contraste (WCAG AA/AAA) */
+    --cor-primaria: #003366; /* Azul Marinho Sóbrio (Autoridade, Confiança) */
+    --cor-secundaria: #FFC300; /* Amarelo Dourado (Aviso, Destaque) */
+    --cor-texto-principal: #1C1C1C; /* Preto Quase Puro */
+    --cor-fundo: #FFFFFF; /* Branco Puro */
+    --cor-fundo-secundario: #F4F6F8; /* Cinza claro para blocos */
+    --cor-link-hover: #004488; /* Tom mais claro para hover */
+
+    /* Fontes (Legibilidade) */
+    --fonte-principal: 'Inter', 'Roboto', Arial, sans-serif;
+    --tamanho-base: 18px; /* Maior para melhor legibilidade no texto corrido */
+}
+
+/*==========================================================*/
+/* 2. BASE (RESET E TIPOGRAFIA GERAL) */
+/*==========================================================*/
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--fonte-principal);
+    font-size: var(--tamanho-base);
+    line-height: 1.6; /* Aumentado para melhor leitura (WCAG) */
+    color: var(--cor-texto-principal);
+    background-color: var(--cor-fundo);
+    -webkit-font-smoothing: antialiased;
+    scroll-behavior: smooth;
+}
+
+/* Links */
+a {
+    color: var(--cor-primaria);
+    text-decoration: underline; /* Manter sublinhado para acessibilidade */
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: var(--cor-link-hover);
+    text-decoration: none; /* Sublinhado pode desaparecer no hover para feedback */
+}
+
+/* Foco para Acessibilidade (Teclado) */
+a:focus,
+button:focus,
+#search-input:focus {
+    outline: 3px solid var(--cor-secundaria); /* Estilo de foco forte */
+    outline-offset: 2px;
+    border-color: var(--cor-secundaria);
+}
+
+/* Títulos (Hierarquia e Acessibilidade) */
+h1, h2, h3 {
+    line-height: 1.2;
+    margin-bottom: 0.5em;
+    font-weight: 700;
+    color: var(--cor-primaria); /* Títulos em cor de destaque */
+}
+
+h1 { font-size: 2.5em; } /* Aproximadamente 45px */
+h2 { font-size: 1.8em; border-bottom: 2px solid var(--cor-fundo-secundario); padding-bottom: 0.3em; } /* Títulos de Seção */
+h3 { font-size: 1.4em; }
+
+p {
+    margin-bottom: 1em;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid var(--cor-fundo-secundario);
+    margin: 3rem 0;
+}
+
+/* Listas */
+ul {
+    list-style: none;
+}
+
+/*==========================================================*/
+/* 3. CABEÇALHO E NAVEGAÇÃO (HEADER & NAV) - NOVO LAYOUT */
+/*==========================================================*/
+
+#site-header {
+    background-color: var(--cor-primaria);
+    color: var(--cor-fundo);
+    padding: 1rem 1.5rem 0 1.5rem; /* Padding ajustado nas laterais */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Novo Container para Título e Navegação (Centralização Mobile) */
+#header-nav-container {
+    max-width: 1300px;
+    margin: 0 auto;
+    display: flex; 
+    flex-direction: column; /* Título em cima, Nav embaixo (Padrão Mobile) */
+    align-items: center; /* Centraliza Título/Subtítulo no Mobile */
+}
+
+/* Conteúdo do Título e Subtítulo */
+.header-content {
+    text-align: center; /* Garante que o texto do h1 e p fique centralizado */
+    padding-bottom: 0.8rem; 
+    width: 100%;
+}
+
+#site-header h1 {
+    color: var(--cor-fundo);
+    font-size: 1.8em; /* Levemente maior no mobile */
+    margin: 0 0 0.2rem 0;
+}
+
+#site-header p {
+    font-size: 0.9em;
+    opacity: 0.8;
+    margin-bottom: 0.5rem;
+}
+
+/* Navegação Principal (Módulos Temáticos) */
+nav[aria-label="Navegação de Módulos Legais"] {
+    width: 100%;
+    padding-bottom: 0.5rem;
+}
+
+nav[aria-label="Navegação de Módulos Legais"] ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem; 
+    justify-content: center; /* Centraliza os links no mobile */
+    list-style: none;
+}
+
+nav[aria-label="Navegação de Módulos Legais"] a {
+    color: var(--cor-fundo);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px 4px 0 0; /* Bordas no topo para dar efeito de aba */
+    transition: background-color 0.2s ease;
+    font-size: 0.9em;
+}
+
+nav[aria-label="Navegação de Módulos Legais"] a:hover {
+    background-color: var(--cor-link-hover);
+    color: var(--cor-fundo);
+}
+
+
+/*==========================================================*/
+/* 4. LAYOUT PRINCIPAL (GRID E RESPONSIVIDADE) */
+/*==========================================================*/
+
+/* Contêiner que envolve MAIN e ASIDE */
+.container-grid {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem; /* Padding base para mobile e desktop */
+    display: block; /* Padrão para mobile */
+}
+
+main {
+    padding: 0;
+}
+
+aside {
+    padding: 1.5rem;
+    background-color: var(--cor-fundo-secundario);
+    border-radius: 6px;
+    margin-top: 2rem; /* Espaço após o conteúdo principal no mobile */
+}
+
+aside h2, aside h3 {
+    color: var(--cor-texto-principal);
+    border: none;
+    margin-top: 0;
+}
+
+/* Layout de Duas Colunas (Desktop) */
+@media (min-width: 900px) {
+    .container-grid {
+        display: grid;
+        grid-template-columns: 2.5fr 1fr; /* Conteúdo maior e barra lateral menor */
+        gap: 3rem;
+    }
+    
+    aside {
+        order: 1; /* Coloca a barra lateral à direita */
+        margin-top: 0;
+        position: sticky;
+        top: 100px; /* Alinhado após o cabeçalho fixo */
+        height: fit-content;
+    }
+
+    /* Regras do Header para Desktop (Título e Nav lado a lado) */
+    #header-nav-container {
+        flex-direction: row; 
+        justify-content: space-between; 
+        align-items: flex-end; 
+        padding-bottom: 0.5rem;
+    }
+
+    .header-content {
+        text-align: left; /* Alinha o texto do título à esquerda no desktop */
+        padding-bottom: 0; 
+    }
+
+    #site-header h1 {
+        font-size: 2.2em; /* Tamanho maior para desktop */
+        margin: 0;
+    }
+
+    nav[aria-label="Navegação de Módulos Legais"] ul {
+        justify-content: flex-end; /* Links alinhados à direita */
+        gap: 1rem; /* Mais espaço entre os links */
+    }
+}
+
+/*==========================================================*/
+/* 5. ELEMENTOS DA BARRA LATERAL (ASIDE) */
+/*==========================================================*/
+
+/* Form de Busca */
+aside form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+}
+
+aside label {
+    font-weight: 600;
+}
+
+#search-input {
+    padding: 0.8rem;
+    border: 1px solid #CCC;
+    border-radius: 4px;
+    font-size: 1em;
+}
+
+aside button {
+    background-color: var(--cor-secundaria);
+    color: var(--cor-texto-principal);
+    padding: 0.8rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 700;
+    transition: background-color 0.2s ease;
+}
+
+aside button:hover {
+    background-color: #e5b000;
+}
+
+aside button:active {
+    /* Feedback ao clique */
+    transform: translateY(1px);
+    box-shadow: none;
+}
+
+/* Lista de Ferramentas */
+#ferramentas ul {
+    padding-left: 0;
+}
+
+#ferramentas li {
+    padding: 0.5rem 0;
+    border-top: 1px dashed #CCC;
+}
+
+#ferramentas li a {
+    text-decoration: none;
+    font-weight: 500;
+    display: block;
+}
+
+/*==========================================================*/
+/* 6. MÓDULOS DE CONTEÚDO E DESTAQUES */
+/*==========================================================*/
+
+/* Artigo da CLT (Para destacar o texto legal) */
+.clt-artigo {
+    background-color: var(--cor-fundo-secundario);
+    border-left: 5px solid var(--cor-primaria);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: 0 4px 4px 0;
+}
+
+.clt-artigo h3 {
+    color: var(--cor-primaria);
+    margin-top: 0;
+}
+
+.clt-artigo footer {
+    margin-top: 1rem;
+    font-size: 0.9em;
+    color: #555;
+    border-top: 1px dashed #CCC;
+    padding-top: 0.5rem;
+}
+
+/* Aviso Legal */
+#aviso-legal {
+    margin-top: 3rem;
+    padding: 1.5rem;
+    background-color: rgba(255, 195, 0, 0.1); /* Fundo com transparência da cor secundária */
+    border: 1px solid var(--cor-secundaria);
+    border-radius: 6px;
+}
+
+.disclaimer {
+    color: var(--cor-texto-principal);
+    font-style: italic;
+    font-size: 0.95em;
+    line-height: 1.4;
+    margin-bottom: 0;
+}
+
+/*==========================================================*/
+/* 7. RODAPÉ (FOOTER) */
+/*==========================================================*/
+
+footer {
+    background-color: var(--cor-texto-principal);
+    color: #EFEFEF;
+    padding: 2rem 1rem;
+    text-align: center;
+    font-size: 0.85em;
+}
+
+footer a {
+    /* COR ATUALIZADA: Branco puro para garantir contraste AAA (WCAG) */
+    color: #FFFFFF; 
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+footer a:hover {
+    text-decoration: underline;
+    color: var(--cor-secundaria); /* Hover com o Amarelo Dourado para destaque */
+}
+
+footer nav ul {
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #333;
+}
+
+footer p {
+    margin-top: 1rem;
+    opacity: 0.7;
+}
+
+/*==========================================================*/
+/* 8. BOTÃO FLUTUANTE DE PESQUISA (MOBILE) */
+/*==========================================================*/
+
+picture#btn-pesquisa {
+    display: block;
+    position: fixed; /* Fixa na tela */
+    right: 20px;
+    bottom: 20px;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    z-index: 1001; /* Garante que fique acima de tudo */
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    background-color: var(--cor-secundaria);
+}
+
+picture#btn-pesquisa a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+picture#btn-pesquisa img {
+    /* Dimensões da imagem dentro do botão */
+    width: 30px; 
+    height: 30px;
+    margin: 0 auto;
+}
+
+/* Esconder em desktop, pois a busca principal fica na sidebar */
+@media (min-width: 900px) {
+    picture#btn-pesquisa {
+        display: none;
+    }
+}
+
+/*==========================================================*/
+/* 9. UTILITIES (Padrões de Margem Específicos) */
+/*==========================================================*/
+
+/* Classe para grandes margens no topo de seções (130px) */
+.mt-space-section {
+    /* Define o espaçamento de 130px no topo */
+    margin-top: 25vh!important; 
+}
+.mb-space-section {
+    /* Define o espaçamento de 130px no topo */
+    margin-top: 25vh!important; 
+}
+.mb-3 {
+    margin-bottom: 1.5rem !important;
+}

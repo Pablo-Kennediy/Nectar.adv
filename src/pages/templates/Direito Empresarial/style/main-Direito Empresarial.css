@@ -1,0 +1,153 @@
+/* style.css */
+
+/* Reset Básico para Qualidade de Código */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Tipografia Profissional */
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f8f9fa;
+}
+
+/* Estrutura de Layout */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header (Foco na Autoridade) */
+.header {
+    background-color: #1a4d7d; /* Azul Escuro Institucional */
+    color: white;
+    padding: 15px 0;
+    border-bottom: 5px solid #00c7b3; /* Destaque para Inovação/Qualidade */
+}
+
+.header h1 {
+    font-size: 1.8em;
+    display: inline-block;
+}
+
+.header nav {
+    float: right;
+}
+
+.header nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    padding: 5px 10px;
+    transition: background-color 0.3s;
+}
+
+.header nav a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.btn-aviso {
+    border: 1px solid white;
+    border-radius: 4px;
+}
+
+/* Conteúdo Principal */
+main {
+    padding-top: 40px;
+    padding-bottom: 60px;
+}
+
+.intro {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.fundamentacao small {
+    color: #6c757d;
+    font-style: italic;
+    display: block;
+    margin-top: 15px;
+}
+
+/* Cards de Conteúdo (Estrutura e Manutenibilidade) */
+.content-section {
+    margin-bottom: 50px;
+}
+
+.content-section h3 {
+    border-left: 5px solid #1a4d7d;
+    padding-left: 15px;
+    margin-bottom: 30px;
+    color: #1a4d7d;
+}
+
+.card-grid {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.card {
+    background-color: white;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    flex: 1 1 calc(33% - 40px); /* 3 colunas em desktop */
+    min-width: 280px;
+}
+
+.card h4 {
+    color: #00c7b3; /* Cor de Inovação/Destaque */
+    margin-bottom: 10px;
+}
+
+.highlight {
+    border: 2px solid #00c7b3; /* Destaque para Propriedade Industrial */
+}
+
+/* Aviso Legal Final (Integridade Legal) */
+.warning-box {
+    background-color: #fff3cd; /* Cor de alerta amarela */
+    color: #856404;
+    padding: 20px;
+    border: 1px solid #ffeeba;
+    border-radius: 5px;
+    margin-top: 50px;
+}
+
+.warning-box h4 {
+    color: #856404;
+    margin-bottom: 10px;
+}
+
+/* Footer (Licença e Manutenção) */
+.footer {
+    background-color: #343a40;
+    color: #dee2e6;
+    text-align: center;
+    padding: 20px 0;
+    font-size: 0.9em;
+}
+
+/* Responsividade Básica */
+@media (max-width: 768px) {
+    .header nav {
+        float: none;
+        margin-top: 10px;
+        text-align: center;
+    }
+
+    .header nav a {
+        display: block;
+        margin: 5px 0;
+    }
+    
+    .card-grid {
+        flex-direction: column;
+    }
+}

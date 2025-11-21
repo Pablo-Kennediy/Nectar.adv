@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horas Extras e Adicionais</title>
+    <link rel="stylesheet" href="../../styles/main-Direito do Trabalho.css">
+    </head>
+
+<body>
+    <div class="container-grid">
+        <main role="main">
+            <h1 id="titulo-calculadora">Cálculo de Horas Extras e Adicionais</h1>
+            <p>Use esta ferramenta para estimar o valor das suas **Horas Extras** e adicionais de Insalubridade ou
+                Periculosidade. Lembre-se: o cálculo final pode variar conforme o Acordo Coletivo.</p>
+
+            <form id="calculadoraForm" class="search-form" onsubmit="event.preventDefault(); calcularAdicionais();">
+                
+                <h2>Dados de Base</h2>
+
+                <div class="input-group">
+                    <label for="salarioBase">Salário Base Mensal (R$):</label>
+                    <input type="number" id="salarioBase" name="salarioBase" required min="1" step="0.01"
+                        placeholder="Ex: 2500.00">
+                </div>
+
+                <div class="input-group">
+                    <label for="horasMensais">Horas Contratuais Mensais (CLT geralmente 220h):</label>
+                    <input type="number" id="horasMensais" name="horasMensais" required min="1" step="1"
+                        value="220">
+                </div>
+
+                <hr>
+
+                <h2>Horas Extras</h2>
+                <div class="input-group">
+                    <label for="qtdHorasExtras">Quantidade de Horas Extras no Mês:</label>
+                    <input type="number" id="qtdHorasExtras" name="qtdHorasExtras" min="0" value="0">
+                </div>
+
+                <div class="input-group">
+                    <label for="percentualHE">Percentual de Adicional (Mínimo CLT é 50%):</label>
+                    <input type="number" id="percentualHE" name="percentualHE" required min="50" step="1" value="50">
+                </div>
+
+                <hr>
+
+                <h2>Adicionais (Insalubridade/Periculosidade)</h2>
+                <p>Lembre-se: você **não pode acumular** Insalubridade e Periculosidade.</p>
+                
+                <div class="input-group">
+                    <label for="tipoAdicional">Tipo de Adicional a Aplicar:</label>
+                    <select id="tipoAdicional" onchange="toggleInsalubridadePercentual()">
+                        <option value="nenhum">Nenhum</option>
+                        <option value="periculosidade">Periculosidade (30% sobre Salário Base)</option>
+                        <option value="insalubridade">Insalubridade (Grau Mínimo, Médio ou Máximo)</option>
+                    </select>
+                </div>
+                
+                <div class="input-group" id="insalubridade-group" style="display: none;">
+                    <label for="grauInsalubridade">Grau de Insalubridade (sobre Salário Mínimo/Piso):</label>
+                    <select id="grauInsalubridade">
+                        <option value="10">Mínimo (10%)</option>
+                        <option value="20">Médio (20%)</option>
+                        <option value="40">Máximo (40%)</option>
+                    </select>
+                </div>
+
+                <button type="submit">Calcular</button>
+            </form>
+
+            <div id="resultado" class="clt-artigo" style="display: none; margin-top: 2rem;">
+                <h3>Resultado Estimado</h3>
+                <p>Valor da Hora Normal (Aprox.): <span id="valorHora"></span></p>
+                <p>Total de Horas Extras: <span id="totalHE"></span></p>
+                <p>Total de Adicionais: <span id="totalAdicionais"></span></p>
+                <footer>
+                    <p>ESTIMATIVA DE ACRÉSCIMO BRUTO: <span id="acrescimoTotal"></span></p>
+                </footer>
+            </div>
+
+            <section id="aviso-legal" aria-labelledby="aviso-titulo">
+                <h2 id="aviso-titulo">Integridade Legal e Aviso</h2>
+                <p class="disclaimer">
+                    **Aviso Legal (*Caveat Lector* - Cuidado, Leitor):** O conteúdo é **estritamente informativo** e não
+                    substitui o aconselhamento jurídico.
+                </p>
+            </section>
+        </main>
+        
+        </div>
+
+    <script>
+        function toggleInsalubridadePercentual() {
+            const tipoAdicional = document.getElementById('tipoAdicional').value;
+            const insalubridadeGroup = document.getElementById('insalubridade-group');
+            
+            // Exibe o campo de grau de insalubridade se for a opção escolhida
+            insalubridadeGroup.style.display = (tipoAdicional === 'insalubridade') ? 'block' : 'none';
+        }
+
+        function calcularAdicionais() {
+            // Coleta de dados
+            const salarioBase = parseFloat(document.getElementById('salarioBase').value) || 0;
+            const horasMensais = parseFloat(document.getElementById('horasMensais').value) || 220;
+            const qtdHorasExtras = parseFloat(document.getElementById('qtdHorasExtras').value) || 0;
+            const percentualHE = parseFloat(document.getElementById('percentualHE').value) || 50;
+            const tipoAdicional = document.getElementById('tipoAdicional').value;
+            const grauInsalubridade = parseFloat(document.getElementById('grauInsalubridade').value) || 0;
+            
+            // Lógica de Cálculo (simples)
+            const valorHoraNormal = salarioBase / horasMensais;
+            const valorHE = valorHoraNormal * (1 + (percentualHE / 100));
+            const totalHE = qtdHorasExtras * valorHE;
+
+            let totalAdicionais = 0;
+            if (tipoAdicional === 'periculosidade') {
+                totalAdicionais = salarioBase * 0.30;
+            } else if (tipoAdicional === 'insalubridade') {
+                // OBS: O salário de referência (geralmente SM) precisa ser buscado no backend (PHP/MySQL) para precisão.
+                const salarioReferencia = 1500; 
+                totalAdicionais = salarioReferencia * (grauInsalubridade / 100);
+            }
+
+            const acrescimoTotal = totalHE + totalAdicionais;
+
+            // Exibir Resultados
+            document.getElementById('valorHora').textContent = `R$ ${valorHoraNormal.toFixed(2)}`;
+            document.getElementById('totalHE').textContent = `R$ ${totalHE.toFixed(2)}`;
+            document.getElementById('totalAdicionais').textContent = `R$ ${totalAdicionais.toFixed(2)}`;
+            document.getElementById('acrescimoTotal').textContent = `R$ ${acrescimoTotal.toFixed(2)}`;
+            document.getElementById('resultado').style.display = 'block';
+        }
+    </script>
+</body>
+
+</html>

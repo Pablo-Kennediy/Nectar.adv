@@ -1,0 +1,347 @@
+/* Variáveis CSS para gerenciamento fácil de cores */
+:root {
+    --primary-color: #0056b3;
+    /* Azul Marinho Profundo (Autoridade) */
+    --secondary-color: #ffc107;
+    /* Amarelo (Avisos/Destaque) */
+    --action-color: #38a169;
+    /* Verde (Botão) */
+    --background-color: #f8f9fa;
+    /* Fundo Cinza Claro */
+    --text-color: #212529;
+    /* Texto Quase Preto */
+    --light-border: #e9ecef;
+}
+
+/* RESET BÁSICO E TIPOGRAFIA (Aprimorado) */
+body {
+    font-family: 'Open Sans', Arial, sans-serif;
+    line-height: 1.7;
+    /* Aumentado para melhor legibilidade em textos longos */
+    color: var(--text-color);
+    background-color: var(--background-color);
+    /* CORREÇÃO APLICADA: Garantindo que o conteúdo não suba sob o header fixo */
+    padding-top: 100px;
+    margin: 0;
+}
+
+/* Títulos: Maior impacto visual e separação clara */
+h1,
+h2,
+h3 {
+    font-family: 'Merriweather', Georgia, serif;
+    color: var(--primary-color);
+    margin-top: 2em;
+    /* Mais espaço acima do título */
+    padding-bottom: 0.6em;
+    border-bottom: 2px solid var(--light-border);
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+}
+
+h1,
+h2,
+h3,
+p {
+    margin: 15px;
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.2s, border-bottom 0.2s;
+}
+
+a:hover {
+    color: #004085;
+    /* Tom de azul mais escuro no hover */
+    text-decoration: none;
+    border-bottom: 1px solid #004085;
+    /* Underline sutil com borda */
+}
+
+
+/* HEADER E BUSCA (Aprimorado) */
+header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 18px 0;
+    /* Mais imponente */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    /* Sombra mais suave */
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0;
+    /* >>> ALTERAÇÃO APLICADA: Adiciona espaçamento vertical ao título <<< */
+    padding: 5px 0; 
+}
+
+header form {
+    display: flex;
+}
+
+header input[type="search"] {
+    padding: 10px 18px;
+    border: 1px solid #ccc;
+    border-radius: 6px 0 0 6px;
+    width: 300px;
+    font-size: 1rem;
+    transition: all 0.3s;
+}
+
+header input[type="search"]:focus {
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 2px rgba(255, 193, 7, 0.5);
+}
+
+header button[type="submit"] {
+    padding: 10px 18px;
+    background-color: var(--action-color);
+    color: white;
+    border: none;
+    border-radius: 0 6px 6px 0;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+header button[type="submit"]:hover {
+    background-color: #2e8b57;
+}
+
+/* MAIN LAYOUT (GRID) e ESPAÇAMENTO APRIMORADO */
+.layout-grid {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: 40px;
+    margin-top: 30px;
+}
+
+/* NOVO: Aumentar o espaçamento entre as seções principais */
+#conteudo-principal section {
+    margin-bottom: 60px;
+    padding-top: 10px;
+}
+
+/* AJUSTE: Espaço para o destaque inicial */
+#conteudo-principal article.destaque-lei {
+    margin: 40px;
+}
+
+/* ASIDE (MENU LATERAL) - Aprimorado */
+aside {
+    position: sticky;
+    /* CORREÇÃO APLICADA: Alinhado com o padding-top do body */
+    top: 100px;
+    height: fit-content;
+    padding-right: 20px;
+}
+
+aside h2 {
+    border-bottom: 2px solid var(--light-border);
+    padding-bottom: 8px;
+    /* EDITADO: Margem superior definida para 3vh. */
+    margin-top: 3vh;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+aside ul {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0 0;
+}
+
+aside ul a {
+    display: block;
+    padding: 10px 15px;
+    /* Mais preenchimento */
+    color: var(--text-color);
+    text-decoration: none;
+    border-left: 4px solid transparent;
+    margin-left: -15px;
+    transition: all 0.2s;
+}
+
+aside ul a:hover {
+    border-left-color: var(--light-border);
+    background-color: #f3f6f9;
+    color: var(--primary-color);
+}
+
+aside ul a.active {
+    border-left: 4px solid var(--primary-color);
+    /* Borda Ativa com a cor principal */
+    color: var(--primary-color);
+    background-color: #e6f0ff;
+    /* Fundo azul muito sutil para o ativo */
+    font-weight: 700;
+}
+
+
+/* COMPONENTES DE CONTEÚDO */
+
+/* AJUSTE ANTERIOR: Espaçamento vertical entre parágrafos para melhor leitura */
+#conteudo-principal p {
+    margin-bottom: 1.2em;
+    /* Adiciona espaço abaixo de cada parágrafo */
+}
+
+/* Destaque da Lei/Alerta (Mais profissional) */
+.card-alerta {
+    background-color: #fff8e1;
+    /* Fundo mais suave */
+    border-left: 6px solid var(--secondary-color);
+    /* Borda mais grossa */
+    padding: 20px 25px;
+    margin: 30px 0;
+    border-radius: 6px;
+    color: #7d5a00;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    /* Sombra sutil */
+}
+
+.card-alerta h3 {
+    color: #7d5a00;
+    margin-top: 0;
+    border-bottom: none;
+}
+
+/* FOCO NA JURISPRUDÊNCIA/ARTIGO (simulação do CMS) */
+.card-jurisprudencia {
+    border: 1px solid #dee2e6;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    background-color: #ffffff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.card-jurisprudencia strong {
+    color: var(--primary-color);
+}
+
+/* FOOTER */
+footer {
+    background-color: var(--text-color);
+    color: #cccccc;
+    padding: 25px 0;
+    /* Mais espaçamento no footer */
+    margin-top: 60px;
+    /* Mais separação do conteúdo */
+    font-size: 0.9rem;
+}
+
+footer a {
+    color: #ffffff;
+}
+
+/* --- EFEITOS DE ANIMAÇÃO DE ROLAGEM (Scroll Animation) --- */
+
+.fade-in-section {
+    opacity: 0;
+    transform: translateY(20px);
+    /* Começa 20px abaixo da posição final */
+    transition: all 0.6s ease-out;
+    /* Duração e tipo de transição */
+    will-change: opacity, transform;
+    /* Otimização de performance */
+}
+
+/* Classe ativada pelo JavaScript quando o elemento entra na área de visualização */
+.fade-in-section.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+    /* Posição final */
+}
+
+
+/* MEDIA QUERY para Mobile */
+@media (max-width: 800px) {
+    .layout-grid {
+        grid-template-columns: 1fr;
+        /* Coluna única no mobile */
+        gap: 20px;
+    }
+
+    header .container {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    header form {
+        width: 100%;
+    }
+
+    header input[type="search"] {
+        width: 100%;
+        box-sizing: border-box;
+        /* Garante que o padding não estoure a largura */
+    }
+
+    aside {
+        position: static;
+        /* Desativa o sticky no mobile */
+        height: auto;
+        padding-right: 0;
+    }
+
+    aside h2 {
+        text-align: center;
+        border-bottom: none;
+        margin-top: 1em;
+        /* Margem padrão para mobile. */
+    }
+
+    aside ul {
+        list-style: none; /* Garante o estilo de lista */
+        padding: 0;
+        /* Remove display: flex para garantir coluna única */
+        justify-content: center;
+    }
+
+    aside ul a {
+        display: block; /* Garante que ocupe a linha inteira */
+        border-left: 4px solid transparent; /* Manter o estilo de borda */
+        border-bottom: none; /* Remove a borda inferior que era usada para o layout horizontal */
+        margin: 2px 0; /* Espaçamento vertical entre os links */
+        padding: 10px 15px;
+        /* >>> Alteração do penúltimo passo: Centraliza o texto dos links <<< */
+        text-align: center; 
+    }
+
+    aside ul a:hover {
+        border-left-color: var(--light-border);
+        background-color: #f3f6f9;
+        color: var(--primary-color);
+    }
+}
+
+#temas-principais {
+    margin-top: 180px;
+}

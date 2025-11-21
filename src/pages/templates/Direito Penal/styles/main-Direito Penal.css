@@ -1,0 +1,425 @@
+/* ========================================================================
+   1. Variáveis Globais (Dark Mode) e Reset Básico
+   ======================================================================== */
+
+:root {
+    /* Cores */
+    --color-background-primary: #121212; /* Fundo principal muito escuro */
+    --color-background-secondary: #1E1E1E; /* Para cards e seções */
+    --color-text-primary: #E0E0E0; /* Texto principal claro */
+    --color-text-secondary: #9E9E9E; /* Textos de apoio/citações */
+    --color-accent: #BB86FC; /* Roxo/Lavanda (Cor primária para destaque) */
+    --color-accent-dark: #8F62C4; /* Versão escura do accent */
+    --color-error: #CF6679; /* Alerta Legal/Erro */
+    
+    /* Tipografia */
+    --font-family-body: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+    --font-family-heading: 'Georgia', serif;
+    --font-size-base: 1.1rem; /* Aumentado para melhor legibilidade */
+    
+    /* Espaçamento */
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 32px;
+    --space-xl: 64px;
+    
+    /* Borda e Sombra */
+    --border-radius: 4px;
+    --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Reset Básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--color-background-primary);
+    color: var(--color-text-primary);
+    font-family: var(--font-family-body);
+    font-size: var(--font-size-base);
+    line-height: 1.7; /* Aumenta o espaçamento para leitura longa */
+    -webkit-font-smoothing: antialiased;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-md);
+}
+
+/* Links */
+a {
+    color: var(--color-accent);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+a:hover {
+    color: var(--color-accent-dark);
+    text-decoration: underline;
+}
+
+/* ========================================================================
+   2. Cabeçalho e Navegação (Header & Nav)
+   ======================================================================== */
+
+.main-header {
+    background-color: var(--color-background-secondary);
+    padding: var(--space-md) 0;
+    border-bottom: 1px solid #333;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.site-title a {
+    font-family: var(--font-family-heading);
+    color: var(--color-text-primary);
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: var(--space-lg);
+}
+
+.nav-links a {
+    color: var(--color-text-secondary);
+    font-size: 1rem;
+    padding: var(--space-sm);
+}
+
+.nav-links a:hover {
+    color: var(--color-accent);
+    text-decoration: none;
+}
+
+
+/* ========================================================================
+   3. Elementos Comuns (Busca e Botões)
+   ======================================================================== */
+
+.search-form {
+    display: flex;
+    gap: var(--space-sm);
+}
+
+.search-input {
+    padding: var(--space-sm);
+    border: 1px solid #333;
+    background-color: #252525;
+    color: var(--color-text-primary);
+    border-radius: var(--border-radius);
+    width: 300px;
+    font-size: 1rem;
+}
+
+.search-button {
+    background-color: var(--color-accent);
+    color: var(--color-background-primary);
+    border: none;
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: background-color 0.2s;
+}
+
+.search-button:hover {
+    background-color: var(--color-accent-dark);
+}
+
+/* Estilos para a busca grande na Home */
+.large-search .search-input {
+    width: 450px;
+    padding: var(--space-md);
+    font-size: 1.1rem;
+}
+
+/* Breadcrumb */
+.breadcrumb {
+    padding: var(--space-lg) 0;
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+}
+
+.breadcrumb ol {
+    list-style: none;
+    display: flex;
+    gap: 8px;
+}
+
+.breadcrumb a {
+    color: var(--color-text-secondary);
+}
+
+/* ========================================================================
+   4. Estilos da Homepage (index.html)
+   ======================================================================== */
+
+.homepage-main {
+    padding-top: var(--space-xl);
+    padding-bottom: var(--space-xl);
+}
+
+.hero-section {
+    text-align: center;
+    padding: var(--space-xl) 0;
+}
+
+.hero-section h2 {
+    font-size: 2.5rem;
+    font-family: var(--font-family-heading);
+    color: var(--color-accent);
+    margin-bottom: var(--space-md);
+}
+
+.subtitle {
+    font-size: 1.3rem;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-lg);
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #333;
+    margin: var(--space-xl) 0;
+}
+
+.key-resources h3 {
+    text-align: center;
+    margin-bottom: var(--space-lg);
+    font-size: 1.8rem;
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--space-lg);
+}
+
+.resource-card {
+    background-color: var(--color-background-secondary);
+    padding: var(--space-lg);
+    border-radius: var(--border-radius);
+    border-left: 5px solid var(--color-accent);
+    transition: transform 0.2s, background-color 0.2s;
+    box-shadow: var(--box-shadow);
+}
+
+.resource-card:hover {
+    transform: translateY(-3px);
+    background-color: #282828;
+}
+
+.resource-card h4 {
+    font-size: 1.4rem;
+    margin-bottom: var(--space-sm);
+}
+
+.resource-card a {
+    color: var(--color-accent);
+}
+
+/* ========================================================================
+   5. Estilos da Página de Artigo (artigo.html)
+   ======================================================================== */
+
+.article-page {
+    display: grid;
+    grid-template-columns: 3fr 1fr; /* Coluna principal e Sidebar */
+    gap: var(--space-lg);
+    padding: var(--space-lg) var(--space-md);
+}
+
+/* Estrutura Principal do Artigo */
+.legal-article {
+    border-right: 1px solid #333; /* Separador sutil da Sidebar */
+    padding-right: var(--space-lg);
+}
+
+.article-header {
+    margin-bottom: var(--space-lg);
+}
+
+.law-context {
+    color: var(--color-text-secondary);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+}
+
+.article-title {
+    font-size: 2.2rem;
+    font-family: var(--font-family-heading);
+    color: var(--color-accent);
+    margin-top: var(--space-sm);
+    line-height: 1.2;
+}
+
+/* Caput e Parágrafos */
+.article-caput, .paragraph {
+    margin-bottom: var(--space-lg);
+    padding: var(--space-md);
+    background-color: var(--color-background-secondary);
+    border-radius: var(--border-radius);
+    border-left: 3px solid #777;
+}
+
+.caput-text, .paragraph p {
+    font-size: 1.15rem; /* Texto maior para o Artigo */
+}
+
+.pena, .pena-qualificada {
+    font-style: italic;
+    color: var(--color-error); /* Destaca a pena, que é uma consequência */
+    margin-top: var(--space-sm);
+    font-weight: 500;
+}
+
+.paragraph-title {
+    font-size: 1.3rem;
+    color: var(--color-text-primary);
+    margin-bottom: var(--space-sm);
+    border-bottom: 1px dashed #444;
+    padding-bottom: 4px;
+}
+
+/* Listas Legais (Incisos, Alíneas) */
+.incisos, .alineas {
+    list-style: none;
+    padding-left: 0;
+    margin-top: var(--space-md);
+}
+
+.incisos li, .alineas li {
+    padding-left: 20px;
+    text-indent: -20px; /* Alinha o texto após o marcador */
+    margin-bottom: var(--space-sm);
+}
+
+.incisos li::before {
+    content: attr(id) " - "; /* Simula o I - , II - etc. no CSS */
+    color: var(--color-accent);
+    font-weight: bold;
+}
+
+.source-info {
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+    display: block;
+    margin-top: 4px;
+}
+
+/* Sidebar e Conteúdo Relacionado */
+.related-content {
+    padding-top: var(--space-lg);
+}
+
+.related-content h2 {
+    font-size: 1.5rem;
+    border-bottom: 2px solid var(--color-accent);
+    padding-bottom: var(--space-sm);
+    margin-bottom: var(--space-md);
+}
+
+.jurisprudence-list {
+    margin-bottom: var(--space-lg);
+}
+
+.jurisprudence-list dt {
+    font-weight: bold;
+    color: var(--color-accent);
+    margin-top: var(--space-sm);
+}
+
+.jurisprudence-list dd {
+    margin-left: 0;
+    padding-left: 10px;
+    border-left: 2px solid var(--color-background-secondary);
+    color: var(--color-text-secondary);
+}
+
+
+/* ========================================================================
+   6. Rodapé (Footer)
+   ======================================================================== */
+
+.main-footer {
+    background-color: var(--color-background-secondary);
+    padding: var(--space-xl) 0;
+    border-top: 1px solid #333;
+    color: var(--color-text-secondary);
+    font-size: 0.9rem;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.disclaimer {
+    max-width: 60%;
+}
+
+.disclaimer h4 {
+    color: var(--color-error);
+    margin-bottom: var(--space-sm);
+}
+
+.footer-links a {
+    margin-left: var(--space-md);
+    color: var(--color-text-secondary);
+}
+
+.copyright {
+    text-align: center;
+    margin-top: var(--space-md);
+    width: 100%;
+}
+
+/* ========================================================================
+   7. Media Queries (Responsividade)
+   ======================================================================== */
+
+@media (max-width: 900px) {
+    .article-page {
+        grid-template-columns: 1fr; /* Coluna única em telas menores */
+        padding: var(--space-lg);
+    }
+
+    .legal-article {
+        border-right: none;
+        padding-right: 0;
+        border-bottom: 1px solid #333;
+        padding-bottom: var(--space-lg);
+    }
+    
+    .header-nav {
+        flex-direction: column;
+        gap: var(--space-md);
+    }
+    
+    .nav-links {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .large-search .search-input {
+        width: 100%;
+    }
+}

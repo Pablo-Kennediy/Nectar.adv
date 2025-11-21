@@ -1,0 +1,214 @@
+/* RESET BÁSICO */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Paleta de Cores com Madeira/Terra */
+    --vermelho-quente: #CC3333; /* Ação Principal */
+    --vermelho-salmao-pastel: #FF9999; /* Aviso Suave */
+    --marrom-cafe: #5A453A; /* Autoridade/Rodapé/Texto */
+    --bege-castanho: #A58A7A; /* Divisores/Bordas */
+    --bege-areia: #D8C3A5; /* Fundo da Sidebar (Pastel Madeira) */
+    --creme-pessego: #FAF6F2; /* Fundo Geral */
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: var(--marrom-cafe); /* Cor do Texto Principal: Marrom Café */
+    background-color: var(--creme-pessego);
+}
+
+/* CONTAINER PRINCIPAL */
+main {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 20px;
+    display: flex;
+    gap: 40px;
+}
+
+section {
+    flex: 3;
+}
+
+aside {
+    flex: 1;
+    padding: 20px;
+    background-color: var(--bege-areia); /* Sidebar: Bege Areia (Tom Madeira Clara) */
+    border-radius: 8px;
+    align-self: flex-start;
+}
+
+/* HEADER - TÍTULO E NAVEGAÇÃO */
+header {
+    background-color: var(--marrom-cafe); /* Header: Marrom Café (Autoridade) */
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 2.5em;
+    margin-bottom: 5px;
+}
+
+header p {
+    font-size: 1.1em;
+    opacity: 0.9;
+}
+
+nav ul {
+    list-style: none;
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 5px 10px;
+    transition: background-color 0.3s;
+}
+
+nav a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+/* SEÇÕES E CONTEÚDO */
+h2 {
+    color: var(--marrom-cafe); /* Títulos em Marrom Café */
+    font-size: 1.8em;
+    margin-top: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--bege-castanho); /* Borda em Bege Castanho */
+}
+
+h3 {
+    color: var(--marrom-cafe);
+    font-size: 1.4em;
+    margin-bottom: 10px;
+}
+
+p, ul {
+    margin-bottom: 15px;
+}
+
+/* Aviso Legal */
+.aviso {
+    background-color: #FFF6F6;
+    color: var(--vermelho-quente);
+    border: 1px solid var(--vermelho-salmao-pastel);
+    padding: 15px;
+    border-radius: 4px;
+    margin-top: 20px;
+    font-size: 0.95em;
+}
+
+/* Cartões de Conteúdo */
+#conteudo-principal {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.card {
+    background-color: white;
+    padding: 20px;
+    border-left: 5px solid var(--vermelho-quente); /* Destaque principal Vermelho para atração visual */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
+
+.card a {
+    display: inline-block;
+    color: var(--vermelho-quente); /* Link em Vermelho Quente para Ação */
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* ASIDE - FERRAMENTAS */
+aside h2 {
+    border-bottom-color: var(--bege-castanho);
+    color: var(--marrom-cafe);
+}
+
+.tool-link {
+    background-color: white;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border: 1px solid var(--bege-castanho);
+}
+
+.tool-link a {
+    display: block;
+    text-align: center;
+    background-color: var(--vermelho-quente); /* Botão de Ação: Vermelho Quente */
+    color: white;
+    padding: 8px;
+    text-decoration: none;
+    border-radius: 4px;
+    margin-top: 10px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.tool-link a:hover {
+    background-color: #A32929; /* Tom mais escuro para hover */
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: var(--marrom-cafe); /* Footer: Marrom Café */
+    color: var(--bege-areia); /* Texto em Bege Areia */
+    font-size: 0.9em;
+    margin-top: 40px;
+}
+
+footer p {
+    margin: 5px 0;
+}
+
+/* RESPONSIVIDADE BÁSICA */
+@media (max-width: 900px) {
+    main {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    aside {
+        order: -1;
+    }
+}
+
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 2em;
+    }
+    nav ul {
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+    }
+    nav a {
+        display: block;
+        padding: 8px 15px;
+    }
+    #conteudo-principal {
+        grid-template-columns: 1fr;
+    }
+}

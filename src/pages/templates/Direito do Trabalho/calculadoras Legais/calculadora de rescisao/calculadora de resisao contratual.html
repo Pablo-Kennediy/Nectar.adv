@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rescisão Contratual</title>
+    <link rel="stylesheet" href="../../styles/main-Direito do Trabalho.css">
+    </head>
+
+<body>
+    <div class="container-grid">
+        <main role="main">
+            <h1 id="titulo-calculadora">Cálculo de Rescisão Contratual</h1>
+            <p>Use esta ferramenta para estimar os valores de verbas rescisórias (férias, 13º, aviso prévio, multa FGTS). **O cálculo é uma estimativa** e não substitui o demonstrativo oficial.</p>
+
+            <form id="calculadoraRescisaoForm" class="search-form" onsubmit="event.preventDefault(); calcularRescisao();">
+                
+                <h2>Dados do Contrato</h2>
+
+                <div class="input-group">
+                    <label for="tipoRescisao">Tipo de Rescisão:</label>
+                    <select id="tipoRescisao" name="tipoRescisao" required onchange="toggleAvisoMulta()">
+                        <option value="semJustaCausa">Sem Justa Causa (Iniciativa do Empregador)</option>
+                        <option value="pedidoDemissao">Pedido de Demissão (Iniciativa do Empregado)</option>
+                        <option value="acordo">Rescisão por Acordo (Lei 13.467/17)</option>
+                        <option value="justaCausa">Com Justa Causa (Não calcula verbas)</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="dataAdmissao">Data de Admissão:</label>
+                    <input type="date" id="dataAdmissao" name="dataAdmissao" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="dataDemissao">Data da Saída/Demissão (último dia trabalhado):</label>
+                    <input type="date" id="dataDemissao" name="dataDemissao" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="salarioBruto">Salário Bruto Mensal (R$):</label>
+                    <input type="number" id="salarioBruto" name="salarioBruto" required min="1" step="0.01"
+                        placeholder="Ex: 3000.00">
+                </div>
+                
+                <hr>
+
+                <h2>Situação de Verbas</h2>
+
+                <div class="input-group">
+                    <label for="avisoPrevio" id="labelAviso">Aviso Prévio (Iniciativa do Empregador?):</label>
+                    <select id="avisoPrevio" name="avisoPrevio" required>
+                        <option value="indenizado">Indenizado (pago)</option>
+                        <option value="trabalhado">Trabalhado</option>
+                        <option value="naoHouve">Não houve / Dispensado</option>
+                    </select>
+                </div>
+                
+                <div class="input-group">
+                    <label for="feriasVencidas">Férias Vencidas (Qtd de períodos de 12 meses):</label>
+                    <input type="number" id="feriasVencidas" name="feriasVencidas" min="0" value="0">
+                </div>
+
+                <button type="submit">Calcular Verbas</button>
+            </form>
+
+            <div id="resultadoRescisao" class="clt-artigo" style="display: none; margin-top: 2rem;">
+                <h3>Resumo Estimado da Rescisão</h3>
+                <p>Verbas a Receber:</p>
+                <ul>
+                    <li>**13º Salário Proporcional:** <span id="resumo13Salario"></span></li>
+                    <li>**Férias Proporcionais:** <span id="resumoFeriasProp"></span></li>
+                    <li>**Férias Vencidas + 1/3:** <span id="resumoFeriasVencidas"></span></li>
+                    <li>**Aviso Prévio (Valor Estimado):** <span id="resumoAvisoPrevio"></span></li>
+                    <li>**Multa FGTS 40% (ou 20%):** <span id="resumoMultaFGTS"></span></li>
+                </ul>
+                <footer class="box-destaque">
+                    <p>TOTAL ESTIMADO (BRUTO): <span id="totalBruto" style="font-size: 1.5em; font-weight: 700;"></span></p>
+                </footer>
+            </div>
+
+            <section id="aviso-legal" aria-labelledby="aviso-titulo">
+                <h2 id="aviso-titulo">Integridade Legal e Aviso</h2>
+                <p class="disclaimer">
+                    **Aviso Legal (*Caveat Lector*):** Os cálculos são **aproximados**. A precisão depende das regras sindicais e pode envolver descontos (INSS/IRRF) não considerados.
+                </p>
+            </section>
+        </main>
+        
+        </div>
+
+    <script>
+        // Função para ajustar o texto do Aviso Prévio e as regras de Multa do FGTS
+        function toggleAvisoMulta() {
+            const tipo = document.getElementById('tipoRescisao').value;
+            const avisoLabel = document.getElementById('labelAviso');
+            const avisoSelect = document.getElementById('avisoPrevio');
+
+            // Ajusta o label para refletir quem deu o aviso
+            if (tipo === 'pedidoDemissao') {
+                avisoLabel.textContent = 'Aviso Prévio (Iniciativa do Empregado?):';
+                avisoSelect.value = 'naoHouve'; // Padrão: Empregado não trabalha, mas deve indenizar
+            } else if (tipo === 'semJustaCausa') {
+                avisoLabel.textContent = 'Aviso Prévio (Iniciativa do Empregador?):';
+                avisoSelect.value = 'indenizado';
+            }
+            
+            // Se for Justa Causa, desativa o formulário, pois não há verbas a calcular além de saldo de salário.
+            if (tipo === 'justaCausa') {
+                alert('Em caso de Justa Causa, o empregado geralmente só recebe Saldo de Salário e Férias vencidas (se houver). As demais verbas não são devidas.');
+            }
+        }
+
+        function calcularRescisao() {
+            const tipoRescisao = document.getElementById('tipoRescisao').value;
+            const salarioBruto = parseFloat(document.getElementById('salarioBruto').value) || 0;
+            const dataAdmissao = new Date(document.getElementById('dataAdmissao').value);
+            const dataDemissao = new Date(document.getElementById('dataDemissao').value);
+            const feriasVencidas = parseInt(document.getElementById('feriasVencidas').value) || 0;
+
+            if (tipoRescisao === 'justaCausa') {
+                document.getElementById('resultadoRescisao').style.display = 'block';
+                document.getElementById('totalBruto').textContent = 'R$ 0,00 (Apenas Saldo de Salário)';
+                document.getElementById('resumoMultaFGTS').textContent = 'R$ 0,00';
+                return;
+            }
+
+            // --- Lógica de Cálculo (Simplificada para o MVP em JS) ---
+            
+            // 1. Duração do Contrato (em meses)
+            const diffAnos = dataDemissao.getFullYear() - dataAdmissao.getFullYear();
+            const diffMeses = dataDemissao.getMonth() - dataAdmissao.getMonth();
+            let mesesTrabalhadosTotal = diffAnos * 12 + diffMeses;
+
+            // Arredonda para cima se trabalhar 15 dias ou mais no mês da rescisão
+            if (dataDemissao.getDate() >= 15) {
+                mesesTrabalhadosTotal += 1;
+            }
+            
+            // 2. 13º Salário Proporcional (Meses trabalhados no ano atual)
+            const mesAdmissaoAnoDemissao = (dataDemissao.getFullYear() === dataAdmissao.getFullYear()) ? dataAdmissao.getMonth() : 0;
+            const meses13o = mesesTrabalhadosTotal % 12; // Simplificado
+
+            const valor13o = (salarioBruto / 12) * meses13o;
+
+            // 3. Férias Proporcionais + 1/3 (Meses trabalhados após o último vencimento)
+            const mesesFeriasProp = meses13o; // Geralmente acompanham o 13º
+            const valorFeriasProp = ((salarioBruto / 12) * mesesFeriasProp) * 1.3333;
+
+            // 4. Férias Vencidas + 1/3
+            const valorFeriasVencidas = (salarioBruto * feriasVencidas) * 1.3333;
+
+            // 5. Aviso Prévio (Simplificado - Apenas o valor de 1 salário)
+            let valorAviso = 0;
+            if (tipoRescisao === 'semJustaCausa' && document.getElementById('avisoPrevio').value === 'indenizado') {
+                valorAviso = salarioBruto;
+            } else if (tipoRescisao === 'pedidoDemissao' && document.getElementById('avisoPrevio').value === 'naoHouve') {
+                 // Em pedido de demissão, se não trabalhou, deve indenizar (descontar), o que seria um valor negativo.
+                 valorAviso = -salarioBruto; 
+            }
+            
+            // 6. Multa FGTS (Simplificado - Assume que o saldo do FGTS é o salário * mesesTrabalhados)
+            let multaFGTS = 0;
+            if (tipoRescisao === 'semJustaCausa') {
+                // Cálculo 40%
+                multaFGTS = (salarioBruto * mesesTrabalhadosTotal * 0.08) * 0.40; 
+            } else if (tipoRescisao === 'acordo') {
+                // Cálculo 20%
+                multaFGTS = (salarioBruto * mesesTrabalhadosTotal * 0.08) * 0.20;
+            }
+
+            // --- Totalização ---
+            const totalBruto = valor13o + valorFeriasProp + valorFeriasVencidas + valorAviso + multaFGTS;
+
+            // Exibir Resultados
+            document.getElementById('resumo13Salario').textContent = `R$ ${valor13o.toFixed(2)}`;
+            document.getElementById('resumoFeriasProp').textContent = `R$ ${valorFeriasProp.toFixed(2)}`;
+            document.getElementById('resumoFeriasVencidas').textContent = `R$ ${valorFeriasVencidas.toFixed(2)}`;
+            document.getElementById('resumoAvisoPrevio').textContent = `R$ ${valorAviso.toFixed(2)}`;
+            document.getElementById('resumoMultaFGTS').textContent = `R$ ${multaFGTS.toFixed(2)}`;
+            document.getElementById('totalBruto').textContent = `R$ ${totalBruto.toFixed(2)}`;
+            document.getElementById('resultadoRescisao').style.display = 'block';
+        }
+    </script>
+</body>
+
+</html>
